@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-24T06:52:46.354Z</updated>
+  <updated>2019-09-25T17:32:51.586Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C中的头文件</title>
+    <link href="http://yoursite.com/2019/09/25/C%E4%B8%AD%E7%9A%84%E5%A4%B4%E6%96%87%E4%BB%B6/"/>
+    <id>http://yoursite.com/2019/09/25/C中的头文件/</id>
+    <published>2019-09-25T15:05:23.000Z</published>
+    <updated>2019-09-25T17:32:51.586Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="最先了解的知识"><a href="#最先了解的知识" class="headerlink" title="最先了解的知识"></a>最先了解的知识</h3><pre><code>1.系统自带的头文件，用&lt;&gt;包含,自定义的头文件，用&quot;&quot;包含； 2.#include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；3.查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&lt;&gt;的文件，直接从系统默认路径查找；4.变量，函数可以重复定义，但不可以重复定义。</code></pre><a id="more"></a><hr><h3 id="头文件写法"><a href="#头文件写法" class="headerlink" title="头文件写法"></a>头文件写法</h3><pre><code>#ifndef MY_POINT #define MY_POINT ... #endif 这类语句，用于控制#define 与 #endif之间的内容不被重复定义或插入。#define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。我们有时写c程序时，也可以把所有的声明都放到一个头文件中，然后在源文件中 #include&quot;xxx.h&quot;,这样会使你的程序看上去更简洁。</code></pre><hr><h3 id="使用头文件的好处"><a href="#使用头文件的好处" class="headerlink" title="使用头文件的好处"></a>使用头文件的好处</h3><pre><code>1.头文件只是声明，不占内存空间；2.头文件可以定义所用的函数列表，方便查阅你可以调用的函数；3.调用了头文件，就等于赋予了调用某些函数的权限，可以很方便的调用系统的库函数和自己写的一些工具函数；4.头文件可以定义很多宏定义，就是一些全局静态变量的定义，在这样的情况下，只要修改头文件的内容，程序就可以做相应的修改，不用亲自跑到繁琐的代码内去搜索。</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;最先了解的知识&quot;&gt;&lt;a href=&quot;#最先了解的知识&quot; class=&quot;headerlink&quot; title=&quot;最先了解的知识&quot;&gt;&lt;/a&gt;最先了解的知识&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;1.系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用&amp;quot;&amp;quot;包含； 
+
+2.#include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；
+
+3.查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找；
+
+4.变量，函数可以重复定义，但不可以重复定义。&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="c语言,随笔" scheme="http://yoursite.com/tags/c%E8%AF%AD%E8%A8%80-%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>我的第一篇博客</title>
