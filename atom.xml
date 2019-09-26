@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-25T17:32:51.586Z</updated>
+  <updated>2019-09-26T05:24:56.646Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>chrome的插件安装</title>
+    <link href="http://yoursite.com/2019/09/26/chrome%E7%9A%84%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
+    <id>http://yoursite.com/2019/09/26/chrome的插件安装/</id>
+    <published>2019-09-26T03:39:15.000Z</published>
+    <updated>2019-09-26T05:24:56.646Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前在安装chrome插件时踩了好多坑，但是今天在B站上看到了一个很好的视频教程，想看的同学<a href="https://www.bilibili.com/video/av53026948/?p=1" target="_blank" rel="noopener">点击这里</a></p><a id="more"></a><p>#####简述过程</p><h6 id="首先给大家介绍两个比较好的chrome插件网站（推荐给不能使用谷歌搜索的小伙伴）"><a href="#首先给大家介绍两个比较好的chrome插件网站（推荐给不能使用谷歌搜索的小伙伴）" class="headerlink" title="首先给大家介绍两个比较好的chrome插件网站（推荐给不能使用谷歌搜索的小伙伴）"></a>首先给大家介绍两个比较好的chrome插件网站（推荐给不能使用谷歌搜索的小伙伴）</h6><ul><li><a href="https://www.crx4chrome.com" target="_blank" rel="noopener">Crx4Chrome</a>(推荐大家使用))</li></ul><ul><li><a href="https://www.extfans.com" target="_blank" rel="noopener">Extfans</a>(这个网站会让大家关注他的公众号，还要验证码)</li></ul><h6 id="再介绍几个好用的插件"><a href="#再介绍几个好用的插件" class="headerlink" title="再介绍几个好用的插件"></a>再介绍几个好用的插件</h6><ul><li><p>Infinity 新标签页(Pro)    </p><p>  效果图：</p><p>  <img src="http://www.cnplugins.com/uploads/crximage/201504/www.cnplugins.com_dbfmnekepjoapopniengjbcpnbljalfg_2.jpg" alt="infinity"></p><ul><li>Adblock Plus -免费广告拦截程序</li></ul><h6 id="插件的下载与安装"><a href="#插件的下载与安装" class="headerlink" title="插件的下载与安装"></a>插件的下载与安装</h6><p>  下载就很简单，直接去上面给的网站去找自己喜欢的插件下载即可。</p><p>  在Crx4Chrome中会下载 .crx 文件，而在Extfans中会下载到一个压缩文件，就很烦。所以，下面会以Crx4Chrome为例演示。</p></li></ul><p>我这里事先准备好了，crx文件 </p><blockquote><p>1.把.crx后缀改为.zip或.7z<br>2.然后解压<br>3.打开chrome浏览器-&gt;更多工具-&gt;扩展程序<br><img src="https://ftp.bmp.ovh/imgs/2019/09/1586b85c2e5e1c7a.png" alt><br>4.打开右上角的开发者模式<br>5.点击左上角的“加载已解压的扩展程序”，选择我们刚才解压的文件<br><img src="https://ftp.bmp.ovh/imgs/2019/09/04cd940a6ec2903b.png" alt><br>6.这样我们就安装成功了</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前在安装chrome插件时踩了好多坑，但是今天在B站上看到了一个很好的视频教程，想看的同学&lt;a href=&quot;https://www.bilibili.com/video/av53026948/?p=1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;点击这里&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="插件安装, chrome" scheme="http://yoursite.com/tags/%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85-chrome/"/>
+    
+  </entry>
   
   <entry>
     <title>C中的头文件</title>
