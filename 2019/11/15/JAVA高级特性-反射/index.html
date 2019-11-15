@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | ZHY的hexo博客</title>
+  <title>JAVA高级特性 --反射 | ZHY的hexo博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-  <meta name="keywords" content="hexo,java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZHY的hexo博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="什么是反射？Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。我感觉这个动态性，是大家使用反射的最重要的原因，我们可以通过反射并且根据自己的需求，动态的调用一个类的方法。 怎么反射？反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法">
+<meta name="keywords" content="hexo,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA高级特性 --反射">
+<meta property="og:url" content="http://yoursite.com/2019/11/15/JAVA高级特性-反射/index.html">
 <meta property="og:site_name" content="ZHY的hexo博客">
+<meta property="og:description" content="什么是反射？Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。我感觉这个动态性，是大家使用反射的最重要的原因，我们可以通过反射并且根据自己的需求，动态的调用一个类的方法。 怎么反射？反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-15T15:38:33.595Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZHY的hexo博客">
+<meta name="twitter:title" content="JAVA高级特性 --反射">
+<meta name="twitter:description" content="什么是反射？Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。我感觉这个动态性，是大家使用反射的最重要的原因，我们可以通过反射并且根据自己的需求，动态的调用一个类的方法。 怎么反射？反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法">
   
     <link rel="alternative" href="/atom.xml" title="ZHY的hexo博客" type="application/atom+xml">
   
@@ -161,216 +165,224 @@
           </div>
           <div id="js-content" class="content-ll">
             
+<article id="post-JAVA高级特性-反射" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      JAVA高级特性 --反射
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/15/JAVA高级特性-反射/" class="archive-article-date">
+
+        <!--显示阅读次数-->
+        
+          <br/>
+          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+          <span class="icon-sort"></span>
+          <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+                    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+          </span>
+          
+          </a>
+        
+        <!--显示阅读次数完毕-->
+        
+        <a href="/2019/11/15/JAVA高级特性-反射/" class="archive-article-date">
   	<time datetime="2019-11-15T14:37:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-15</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/15/JAVA高级特性-反射/">JAVA高级特性 --反射</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h4><p>Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。<br>我感觉这个动态性，是大家使用反射的最重要的原因，我们可以通过反射并且根据自己的需求，动态的调用一个类的方法。</p>
+<h4 id="怎么反射？"><a href="#怎么反射？" class="headerlink" title="怎么反射？"></a>怎么反射？</h4><p>反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法</p>
+<a id="more"></a>
+<h5 id="加载类的三种方法"><a href="#加载类的三种方法" class="headerlink" title="加载类的三种方法"></a>加载类的三种方法</h5><ol>
+<li><p>使用Class类的静态方法forName()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    //forName里面使用完整类的路径</span><br><span class="line">    Class clazz =Class.forName(&quot;exp.Person&quot;);</span><br><span class="line">&#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用方法getClass()，前提要新建一个对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = new Person().getClass();</span><br><span class="line">//在非静态方法里，也可以使用this关键字</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用这个类的静态变量class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Person.class;</span><br><span class="line">//这个方式简单粗暴个人很喜欢</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+</li>
+</ol>
+<h5 id="解剖类的方法"><a href="#解剖类的方法" class="headerlink" title="解剖类的方法"></a>解剖类的方法</h5><ol>
+<li>public Constructor getConstructor() /构造函数<br>//参数为可变的，指定需要的构造函数的参数类型的class类型<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Constructor c = class.getConstructor(String.class);</span><br><span class="line">c.newInstance();//创建一个对象</span><br></pre></td></tr></table></figure>
 
+</li>
+</ol>
+<p>也可以不用获得构造函数<br><code>class.newInstance()</code><br>直接获得对象,但只限于无参的构造函数</p>
+<ol start="2">
+<li>public Method getMethod() //方法</li>
+<li>public Field getField() //字段，成员方法，只返回public修饰的<h6 id="前面三种方式只能返回，修饰符是public的成员"><a href="#前面三种方式只能返回，修饰符是public的成员" class="headerlink" title="//前面三种方式只能返回，修饰符是public的成员"></a>//前面三种方式只能返回，修饰符是public的成员</h6></li>
+<li>public Constructor getDeclaredConstructor() /构造函数</li>
+<li>public Method getDeclaredMethod() //方法</li>
+<li>public Field getDeclaredField() //字段，成员方法<br>除public外</li>
+</ol>
+<ul>
+<li>私有的成员只能在内部被访问，但是反射可以实现访问私有成员,使用<br><code>setAccessible（true）;</code></li>
+<li>执行方法: invoke()方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package exp;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.InvocationTargetException;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class ReflectDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Class clazz = new Person().getClass();</span><br><span class="line">        try &#123;</span><br><span class="line">            Method method = clazz.getMethod(&quot;run&quot;);</span><br><span class="line">            Object obj = method.invoke(clazz.newInstance());</span><br><span class="line">            System.out.println(obj);</span><br><span class="line"></span><br><span class="line">        &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinzhifu.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/04/JAVA继承常见问题/" class="archive-article-date">
-  	<time datetime="2019-11-04T11:48:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/04/JAVA继承常见问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JAVA继承常见问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/04/JAVA继承常见问题/">JAVA继承常见问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是反射？"><span class="toc-number">1.</span> <span class="toc-text">什么是反射？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#怎么反射？"><span class="toc-number">2.</span> <span class="toc-text">怎么反射？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#加载类的三种方法"><span class="toc-number">2.1.</span> <span class="toc-text">加载类的三种方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解剖类的方法"><span class="toc-number">2.2.</span> <span class="toc-text">解剖类的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#前面三种方式只能返回，修饰符是public的成员"><span class="toc-number">2.2.1.</span> <span class="toc-text">//前面三种方式只能返回，修饰符是public的成员</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/17/写hexo博客的基本知识/" class="archive-article-date">
-  	<time datetime="2019-10-17T15:03:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/17/写hexo博客的基本知识/">写hexo博客的基本知识</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">hexo,命令</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/26/chrome的插件安装/" class="archive-article-date">
-  	<time datetime="2019-09-26T03:39:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/26/chrome的插件安装/">chrome的插件安装</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">插件安装, chrome</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/25/C中的头文件/" class="archive-article-date">
-  	<time datetime="2019-09-25T15:05:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/25/C中的头文件/">C中的头文件</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c语言,随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/24/hello-world/" class="archive-article-date">
-  	<time datetime="2019-09-24T05:29:18.216Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/24/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -402,8 +414,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
