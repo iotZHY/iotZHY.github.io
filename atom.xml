@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-19T11:40:49.664Z</updated>
+  <updated>2020-02-21T11:59:51.263Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,17 +17,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>本地用户文件名的修改</title>
+    <link href="http://yoursite.com/2020/02/21/%E6%9C%AC%E5%9C%B0%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6%E5%90%8D%E7%9A%84%E4%BF%AE%E6%94%B9/"/>
+    <id>http://yoursite.com/2020/02/21/本地用户文件名的修改/</id>
+    <published>2020-02-21T11:38:10.000Z</published>
+    <updated>2020-02-21T11:59:51.263Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><ul><li>本地用户名是我们出装系统时设置的，如果当初我们设置用户名是中文时，可能会遇到一下麻烦，对于一些不支持中文路径的软件，可能就安装不了，所以我最好再初装系统时，还是设置成英文字母为好。<a id="more"></a><h3 id="具体操作"><a href="#具体操作" class="headerlink" title="具体操作"></a>具体操作</h3></li><li>修改我们的注册表<ul><li>按win+r，输入regedit</li><li>按如下路径逐步点击<br><img src="https://i.bmp.ovh/imgs/2020/02/736d9cc8a0b8b5aa.png" alt></li><li>双击涂黄的文件，修改成你想改变的英文名字<br><img src="https://i.bmp.ovh/imgs/2020/02/b5bfe424ad21e2ed.png" alt></li></ul></li><li>重启<ul><li>重启后你会进入一个初始的桌面，不要慌张你的信息没有丢失。</li><li>进入c:\user目录下，修改用你以前的用户名命名的文件夹为你的新名字</li><li>重启电脑</li></ul></li><li>修改环境变量<ul><li>把环境变量中你之前用户名，改成现在的即可</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;本地用户名是我们出装系统时设置的，如果当初我们设置用户名是中文时，可能会遇到一下麻烦，对于一些不支持中文路径的软件，可能就安装不了，所以我最好再初装系统时，还是设置成英文字母为好。
+    
+    </summary>
+    
+    
+    
+      <category term="win10" scheme="http://yoursite.com/tags/win10/"/>
+    
+  </entry>
+  
+  <entry>
     <title>交换机与ARP</title>
     <link href="http://yoursite.com/2020/02/19/%E4%BA%A4%E6%8D%A2%E6%9C%BA%E4%B8%8EARP/"/>
     <id>http://yoursite.com/2020/02/19/交换机与ARP/</id>
     <published>2020-02-19T10:23:28.000Z</published>
-    <updated>2020-02-19T11:40:49.664Z</updated>
+    <updated>2020-02-21T12:03:29.528Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="什么是交换机？"><a href="#什么是交换机？" class="headerlink" title="什么是交换机？"></a>什么是交换机？</h3><pre><code>交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。</code></pre><a id="more"></a><h3 id="它跟集线器的区别？"><a href="#它跟集线器的区别？" class="headerlink" title="它跟集线器的区别？"></a>它跟集线器的区别？</h3><pre><code>最大的区别就在于，集线器工作在OSI模型的第一层，而交换机工作在二层。集线器就像它的名字那样，只起到了聚集的作用，它可以扩大网络，但它也加剧了信道内的碰撞，因为它的工作内容仅仅是把从这一端口收到信息广播到其他端口。而交换机它不光扩大了网络范围，也由于它使用的是单播的方式，所以它消除了碰撞，加快了网络速度。</code></pre><h3 id="交换机怎样实现单播？"><a href="#交换机怎样实现单播？" class="headerlink" title="交换机怎样实现单播？"></a>交换机怎样实现单播？</h3><pre><code>这得意与，它的MAC地址表，这个地址表记录交换机端口与MAC地址的映射关系（每一个端口对应一个计算机）。这个MAC地址表不是人为给交换机的，而是由交换机自己学习的。学习过程也比较简单，就是在某一端口发送帧时，交换机会从该帧中获得源MAC，然后去自己的MAC地址表检索该端口，如果没有就直接添加，如果有则直接覆盖掉。交换机也会以固定的时间为周期来刷新MAC地址表。</code></pre><h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><pre><code>中文名称，地址解析协议，功能比较简单，就是把IP地址转换成MAC地址。它主要来维护本地主机的一个路由表。让我们来简单模拟一下这个过程，A主机想要把信息发给局域网内的B主机，而A只知道B的IP而不知道B的MAC（局域网内只认识MAC），所以我们需要把IP转换成MAC，这是就用到了ARP。</code></pre><p>这张图很能说明整个过程，只是A到B是广播，B到A是单播</p><p><img src="https://ftp.bmp.ovh/imgs/2020/02/26d3c5b736e77011.png" alt></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="什么是交换机？"><a href="#什么是交换机？" class="headerlink" title="什么是交换机？"></a>什么是交换机？</h3><ul><li><p>交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。</p><a id="more"></a><h3 id="它跟集线器的区别？"><a href="#它跟集线器的区别？" class="headerlink" title="它跟集线器的区别？"></a>它跟集线器的区别？</h3></li><li><p>最大的区别就在于，集线器工作在OSI模型的第一层，而交换机工作在二层。集线器就像它的名字那样，只起到了聚集的作用，它可以扩大网络，但它也加剧了信道内的碰撞，因为它的工作内容仅仅是把从这一端口收到信息广播到其他端口。而交换机它不光扩大了网络范围，也由于它使用的是单播的方式，所以它消除了碰撞，加快了网络速度。</p><h3 id="交换机怎样实现单播？"><a href="#交换机怎样实现单播？" class="headerlink" title="交换机怎样实现单播？"></a>交换机怎样实现单播？</h3></li><li><p>这得意与，它的MAC地址表，这个地址表记录交换机端口与MAC地址的映射关系（每一个端口对应一个计算机）。这个MAC地址表不是人为给交换机的，而是由交换机自己学习的。</p></li><li><p>学习过程也比较简单，就是在某一端口发送帧时，交换机会从该帧中获得源MAC，然后去自己的MAC地址表检索该端口，如果没有就直接添加，如果有则直接覆盖掉。交换机也会以固定的时间为周期来刷新MAC地址表。</p><h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3></li><li><p>中文名称，地址解析协议，功能比较简单，就是把IP地址转换成MAC地址。它主要来维护本地主机的一个路由表。<br>让我们来简单模拟一下这个过程，A主机想要把信息发给局域网内的B主机，而A只知道B的IP而不知道B的MAC（局域网内只认识MAC），所以我们需要把IP转换成MAC，这是就用到了ARP。</p></li><li><p>这张图很能说明整个过程，只是A到B是广播，B到A是单播</p></li></ul><p><img src="https://ftp.bmp.ovh/imgs/2020/02/26d3c5b736e77011.png" alt></p>]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;什么是交换机？&quot;&gt;&lt;a href=&quot;#什么是交换机？&quot; class=&quot;headerlink&quot; title=&quot;什么是交换机？&quot;&gt;&lt;/a&gt;什么是交换机？&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。&lt;/code&gt;&lt;/pre&gt;
+      &lt;h3 id=&quot;什么是交换机？&quot;&gt;&lt;a href=&quot;#什么是交换机？&quot; class=&quot;headerlink&quot; title=&quot;什么是交换机？&quot;&gt;&lt;/a&gt;什么是交换机？&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。&lt;/p&gt;
     
     </summary>
     
@@ -66,7 +89,7 @@
     <link href="http://yoursite.com/2019/11/15/JAVA%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7-%E5%8F%8D%E5%B0%84/"/>
     <id>http://yoursite.com/2019/11/15/JAVA高级特性-反射/</id>
     <published>2019-11-15T14:37:26.000Z</published>
-    <updated>2019-11-17T07:08:55.678Z</updated>
+    <updated>2020-02-21T12:17:54.597Z</updated>
     
     <content type="html"><![CDATA[<h4 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h4><p>Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。<br>我感觉这个动态性，是大家使用反射的最重要的原因，我们可以通过反射并且根据自己的需求，动态的调用一个类的方法。</p><h4 id="怎么反射？"><a href="#怎么反射？" class="headerlink" title="怎么反射？"></a>怎么反射？</h4><p>反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法</p><a id="more"></a><h5 id="加载类的三种方法"><a href="#加载类的三种方法" class="headerlink" title="加载类的三种方法"></a>加载类的三种方法</h5><ol><li><p>使用Class类的静态方法forName()</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    //forName里面使用完整类的路径</span><br><span class="line">    Class clazz =Class.forName(&quot;exp.Person&quot;);</span><br><span class="line">&#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>使用方法getClass()，前提要新建一个对象</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = new Person().getClass();</span><br><span class="line">//在非静态方法里，也可以使用this关键字</span><br></pre></td></tr></table></figure></li><li><p>使用这个类的静态变量class</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Person.class;</span><br><span class="line">//这个方式简单粗暴个人很喜欢</span><br></pre></td></tr></table></figure></li></ol><h5 id="解剖类的方法"><a href="#解剖类的方法" class="headerlink" title="解剖类的方法"></a>解剖类的方法</h5><ol><li><p>public Constructor getConstructor() /构造函数<br>//参数为可变的，指定需要的构造函数的参数类型的class类型</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Constructor c = class.getConstructor(String.class);</span><br><span class="line">c.newInstance();//创建一个对象</span><br></pre></td></tr></table></figure></li><li><p>public Method getMethod() //方法</p></li><li><p>public Field getField() //字段，成员方法，只返回public修饰的</p><h6 id="前面三种方式只能返回，修饰符是public的成员"><a href="#前面三种方式只能返回，修饰符是public的成员" class="headerlink" title="//前面三种方式只能返回，修饰符是public的成员"></a>//前面三种方式只能返回，修饰符是public的成员</h6></li><li><p>public Constructor getDeclaredConstructor() /构造函数</p></li><li><p>public Method getDeclaredMethod() //方法</p></li><li><p>public Field getDeclaredField() //字段，成员方法除public外</p></li></ol><ul><li>可以不用获得构造函数直接获得对象,但只限于无参的构造函数<br><code>clazz.newInstance()</code></li><li>私有的成员只能在内部被访问，但是反射可以实现访问私有成员,使用<br><code>setAccessible（true）;</code></li><li>执行方法: invoke()方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package exp;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.InvocationTargetException;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class ReflectDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Class clazz = new Person().getClass();</span><br><span class="line">        try &#123;</span><br><span class="line">            Method method = clazz.getMethod(&quot;run&quot;);</span><br><span class="line">            Object obj = method.invoke(clazz.newInstance());</span><br><span class="line">            System.out.println(obj);</span><br><span class="line"></span><br><span class="line">        &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
     
@@ -167,19 +190,17 @@
     <link href="http://yoursite.com/2019/09/25/C%E4%B8%AD%E7%9A%84%E5%A4%B4%E6%96%87%E4%BB%B6/"/>
     <id>http://yoursite.com/2019/09/25/C中的头文件/</id>
     <published>2019-09-25T15:05:23.000Z</published>
-    <updated>2019-09-25T17:32:51.586Z</updated>
+    <updated>2020-02-21T12:11:27.178Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="最先了解的知识"><a href="#最先了解的知识" class="headerlink" title="最先了解的知识"></a>最先了解的知识</h3><pre><code>1.系统自带的头文件，用&lt;&gt;包含,自定义的头文件，用&quot;&quot;包含； 2.#include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；3.查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&lt;&gt;的文件，直接从系统默认路径查找；4.变量，函数可以重复定义，但不可以重复定义。</code></pre><a id="more"></a><hr><h3 id="头文件写法"><a href="#头文件写法" class="headerlink" title="头文件写法"></a>头文件写法</h3><pre><code>#ifndef MY_POINT #define MY_POINT ... #endif 这类语句，用于控制#define 与 #endif之间的内容不被重复定义或插入。#define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。我们有时写c程序时，也可以把所有的声明都放到一个头文件中，然后在源文件中 #include&quot;xxx.h&quot;,这样会使你的程序看上去更简洁。</code></pre><hr><h3 id="使用头文件的好处"><a href="#使用头文件的好处" class="headerlink" title="使用头文件的好处"></a>使用头文件的好处</h3><pre><code>1.头文件只是声明，不占内存空间；2.头文件可以定义所用的函数列表，方便查阅你可以调用的函数；3.调用了头文件，就等于赋予了调用某些函数的权限，可以很方便的调用系统的库函数和自己写的一些工具函数；4.头文件可以定义很多宏定义，就是一些全局静态变量的定义，在这样的情况下，只要修改头文件的内容，程序就可以做相应的修改，不用亲自跑到繁琐的代码内去搜索。</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="最先了解的知识"><a href="#最先了解的知识" class="headerlink" title="最先了解的知识"></a>最先了解的知识</h3><ol><li>系统自带的头文件，用&lt;&gt;包含,自定义的头文件，用””包含； </li><li>#include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；</li><li>查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&lt;&gt;的文件，直接从系统默认路径查找；</li><li>变量，函数可以重复定义，但不可以重复定义。<a id="more"></a></li></ol><hr><h3 id="头文件写法"><a href="#头文件写法" class="headerlink" title="头文件写法"></a>头文件写法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#ifndef MY_POINT </span><br><span class="line">#define MY_POINT </span><br><span class="line">... </span><br><span class="line">#endif</span><br></pre></td></tr></table></figure><ul><li>这类语句，用于控制#define 与 #endif之间的内容不被重复定义或插入。</li><li>#define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。</li><li>我们有时写c程序时，也可以把所有的声明都放到一个头文件中，然后在源文件中 #include”xxx.h”,这样会使你的程序看上去更简洁。</li></ul><hr><h3 id="使用头文件的好处"><a href="#使用头文件的好处" class="headerlink" title="使用头文件的好处"></a>使用头文件的好处</h3><ol><li>头文件只是声明，不占内存空间；</li><li>头文件可以定义所用的函数列表，方便查阅你可以调用的函数；</li><li>调用了头文件，就等于赋予了调用某些函数的权限，可以很方便的调用系统的库函数和自己写的一些工具函数；</li><li>头文件可以定义很多宏定义，就是一些全局静态变量的定义，在这样的情况下，只要修改头文件的内容，程序<br>就可以做相应的修改，不用亲自跑到繁琐的代码内去搜索。</li></ol>]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;最先了解的知识&quot;&gt;&lt;a href=&quot;#最先了解的知识&quot; class=&quot;headerlink&quot; title=&quot;最先了解的知识&quot;&gt;&lt;/a&gt;最先了解的知识&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;1.系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用&amp;quot;&amp;quot;包含； 
-
-2.#include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；
-
-3.查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找；
-
-4.变量，函数可以重复定义，但不可以重复定义。&lt;/code&gt;&lt;/pre&gt;
+      &lt;h3 id=&quot;最先了解的知识&quot;&gt;&lt;a href=&quot;#最先了解的知识&quot; class=&quot;headerlink&quot; title=&quot;最先了解的知识&quot;&gt;&lt;/a&gt;最先了解的知识&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用””包含； &lt;/li&gt;
+&lt;li&gt;#include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；&lt;/li&gt;
+&lt;li&gt;查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找；&lt;/li&gt;
+&lt;li&gt;变量，函数可以重复定义，但不可以重复定义。
     
     </summary>
     
