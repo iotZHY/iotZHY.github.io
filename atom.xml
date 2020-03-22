@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-21T11:59:51.263Z</updated>
+  <updated>2020-03-22T04:10:58.567Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VPN与NAT</title>
+    <link href="http://yoursite.com/2020/03/22/VPN%E4%B8%8ENAT/"/>
+    <id>http://yoursite.com/2020/03/22/VPN与NAT/</id>
+    <published>2020-03-22T02:33:40.000Z</published>
+    <updated>2020-03-22T04:10:58.567Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="产生的原因："><a href="#产生的原因：" class="headerlink" title="产生的原因："></a>产生的原因：</h4><p>  由于ip地址的短缺，一个机构内可以申请到的ip地址数远远小于机构内的主机数，且也考虑到互联网的安全性，也不会把所有的主机接入互联网。为了解决问题 RFC1918指明了一些专用地址 ，这些地址只能用于一个机构内通讯 ，而不能用于互联网上的通讯。互联网上的路由器 对目的地址时专用地址的数据报一律不转发。专用地址是全球不唯一的，可重复的，自然也就无法连入互联网。一共有三个地址块：<br>（1）10.0.0.0——10.255.255.255<br>（2）172.16.0.0——172.31.255.255<br>（3）192.168.0.0——192.168.255.255</p><a id="more"></a><h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>如果这些机构内的主机想要和互联网上的主机通信时该咋办呢？<br>如何连接两个异地的局域网？</p><h4 id="NAT技术："><a href="#NAT技术：" class="headerlink" title="NAT技术："></a>NAT技术：</h4><p>NAT（Network Address Translation，网络地址转换）是1994年提出的。当在专用网内部的一些主机本来已经分配到了本地IP地址（即仅在本专用网内使用的专用地址），但现在又想和因特网上的主机通信（并不需要加密）时，可使用NAT方法。<br>NAT的实现方式有三种，即静态转换Static Nat、动态转换Dynamic Nat和端口多路复用OverLoad。</p><ul><li>静态转换：IP地址对是一对一的，是一成不变的，某个私有IP地址只转换为某个公有IP地址。</li><li>动态转换：ip地址是多对多的，IP地址是不确定的，是随机的，所有被授权访问上Internet的私有IP地址可随机转换为任何指定的合法IP地址。动态转换可以使用多个合法外部地址集。当ISP提供的合法IP地址略少于网络内部的计算机数量时。可以采用动态转换的方式。</li><li>端口多路复用（PAT)是指改变外出数据包的源端口并进行端口转换，即端口地址转换。ip地址一对多，内部网络的所有主机均可共享一个合法外部IP地址实现对Internet的访问，从而可以最大限度地节约IP地址资源。同时，又可隐藏网络内部的所有主机，有效避免来自internet的攻击。因此，目前网络中应用最多的就是端口多路复用方式。</li></ul><p>NAT工作流程：<br><img src="https://bkimg.cdn.bcebos.com/pic/0dd7912397dda144810a190cb2b7d0a20cf48608?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2U3Mg==,xp_5,yp_5" alt><br>第一步，局域网主机发出IP数据报（RES=192.168.1.100，DES=202.113.112.x），经过NAT网关时，NAT网关会根据它的映射表，修改数据报的源地址为一个合法的公网地址，这时的数据报变为（RES=202.113.113.x，DES=202.113.112.x），发送给服务器<br>第二部分，服务器收到后，以为给他发送消息的主机的ip为202.113.113.x，于是把请求到的数据发送给202.113.113.x，故发出的ip报文（RES=202.113.112.x，DES=202.113.113.x），经过NAT网关时，它把ip报文的目的地址根据映射表改为局域网内的ip，ip报文变为（RES=202.113.112.x，DES=192.168.1.100）</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;产生的原因：&quot;&gt;&lt;a href=&quot;#产生的原因：&quot; class=&quot;headerlink&quot; title=&quot;产生的原因：&quot;&gt;&lt;/a&gt;产生的原因：&lt;/h4&gt;&lt;p&gt;  由于ip地址的短缺，一个机构内可以申请到的ip地址数远远小于机构内的主机数，且也考虑到互联网的安全性，也不会把所有的主机接入互联网。为了解决问题 RFC1918指明了一些专用地址 ，这些地址只能用于一个机构内通讯 ，而不能用于互联网上的通讯。互联网上的路由器 对目的地址时专用地址的数据报一律不转发。专用地址是全球不唯一的，可重复的，自然也就无法连入互联网。一共有三个地址块：&lt;br&gt;（1）10.0.0.0——10.255.255.255&lt;br&gt;（2）172.16.0.0——172.31.255.255&lt;br&gt;（3）192.168.0.0——192.168.255.255&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="计算机网络" scheme="http://yoursite.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>本地用户文件名的修改</title>
