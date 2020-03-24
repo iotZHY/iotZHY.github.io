@@ -6,25 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>交换机与ARP | ZHY的hexo博客</title>
+  <title>android的Handler机制 | ZHY的hexo博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-  <meta name="description" content="什么是交换机？ 交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。">
-<meta name="keywords" content="计算机网络">
+  <meta name="description" content="Handler是什么？在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”">
+<meta name="keywords" content="android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="交换机与ARP">
-<meta property="og:url" content="http://yoursite.com/2020/02/19/交换机与ARP/index.html">
+<meta property="og:title" content="android的Handler机制">
+<meta property="og:url" content="http://yoursite.com/2020/03/24/android的Handler机制/index.html">
 <meta property="og:site_name" content="ZHY的hexo博客">
-<meta property="og:description" content="什么是交换机？ 交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。">
+<meta property="og:description" content="Handler是什么？在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://ftp.bmp.ovh/imgs/2020/02/26d3c5b736e77011.png">
-<meta property="og:updated_time" content="2020-02-21T12:03:29.528Z">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2020/03/bf967fb7ee375441.png">
+<meta property="og:updated_time" content="2020-03-24T11:52:03.021Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="交换机与ARP">
-<meta name="twitter:description" content="什么是交换机？ 交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。">
-<meta name="twitter:image" content="https://ftp.bmp.ovh/imgs/2020/02/26d3c5b736e77011.png">
+<meta name="twitter:title" content="android的Handler机制">
+<meta name="twitter:description" content="Handler是什么？在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2020/03/bf967fb7ee375441.png">
   
     <link rel="alternative" href="/atom.xml" title="ZHY的hexo博客" type="application/atom+xml">
   
@@ -167,14 +167,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-交换机与ARP" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-android的Handler机制" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      交换机与ARP
+      android的Handler机制
     </h1>
   
 
@@ -191,30 +191,54 @@
         
         <!--显示阅读次数完毕-->
         
-        <a href="/2020/02/19/交换机与ARP/" class="archive-article-date">
-  	<time datetime="2020-02-19T10:23:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-19</time>
+        <a href="/2020/03/24/android的Handler机制/" class="archive-article-date">
+  	<time datetime="2020-03-24T10:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="什么是交换机？"><a href="#什么是交换机？" class="headerlink" title="什么是交换机？"></a>什么是交换机？</h3><ul>
-<li><p>交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。</p>
+        <h4 id="Handler是什么？"><a href="#Handler是什么？" class="headerlink" title="Handler是什么？"></a>Handler是什么？</h4><p>在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”</p>
 <a id="more"></a>
-<h3 id="它跟集线器的区别？"><a href="#它跟集线器的区别？" class="headerlink" title="它跟集线器的区别？"></a>它跟集线器的区别？</h3></li>
-<li><p>最大的区别就在于，集线器工作在OSI模型的第一层，而交换机工作在二层。集线器就像它的名字那样，只起到了聚集的作用，它可以扩大网络，但它也加剧了信道内的碰撞，因为它的工作内容仅仅是把从这一端口收到信息广播到其他端口。而交换机它不光扩大了网络范围，也由于它使用的是单播的方式，所以它消除了碰撞，加快了网络速度。</p>
-<h3 id="交换机怎样实现单播？"><a href="#交换机怎样实现单播？" class="headerlink" title="交换机怎样实现单播？"></a>交换机怎样实现单播？</h3></li>
-<li><p>这得意与，它的MAC地址表，这个地址表记录交换机端口与MAC地址的映射关系（每一个端口对应一个计算机）。这个MAC地址表不是人为给交换机的，而是由交换机自己学习的。</p>
-</li>
-<li><p>学习过程也比较简单，就是在某一端口发送帧时，交换机会从该帧中获得源MAC，然后去自己的MAC地址表检索该端口，如果没有就直接添加，如果有则直接覆盖掉。交换机也会以固定的时间为周期来刷新MAC地址表。</p>
-<h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3></li>
-<li><p>中文名称，地址解析协议，功能比较简单，就是把IP地址转换成MAC地址。它主要来维护本地主机的一个路由表。<br>让我们来简单模拟一下这个过程，A主机想要把信息发给局域网内的B主机，而A只知道B的IP而不知道B的MAC（局域网内只认识MAC），所以我们需要把IP转换成MAC，这是就用到了ARP。</p>
-</li>
-<li><p>这张图很能说明整个过程，只是A到B是广播，B到A是单播</p>
+<ol>
+<li>成员介绍 </li>
+</ol>
+<ul>
+<li>Message：主要功能是进行消息的封装，同时可以指定消息的操作形式； </li>
+<li>Looper：消息循环泵，用来为一个线程跑一个消息循环。每一个线程最多只可以拥有一个。 </li>
+<li>MessageQueue：就是一个消息队列，存放消息的地方。每一个线程最多只可以拥有一个。 </li>
+<li>Handler：消息的处理者，handler 负责将需要传递的信息封装成Message，发送给Looper，继而由Looper将Message放入MessageQueue中。当Looper对象看到MessageQueue中含有Message，就将其广播出去。该handler 对象收到该消息后，调用相应的handler 对象的handleMessage()方法对其进行处理。 </li>
+</ul>
+<ol start="2">
+<li>同线程各成员的关系及数量 </li>
+</ol>
+<ul>
+<li>一个线程中只能有一个Looper，只能有一个MessageQueue，可以有多个Handler，多个Messge； </li>
+<li>一个Looper只能维护唯一一个MessageQueue，可以接受多个Handler发来的消息； </li>
+<li>一个Message只能属于唯一一个Handler； </li>
+<li>同一个Handler只能处理自己发送给Looper的那些Message；<h4 id="为什么需要Handler？"><a href="#为什么需要Handler？" class="headerlink" title="为什么需要Handler？"></a>为什么需要Handler？</h4>最主要的原因是，在android中遵循单线程模型，子线程不允许访问UI，只有主线程才能访问UI。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread( <span class="keyword">new</span> Runnable() &#123;     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;     </span><br><span class="line">        myView.invalidate();    </span><br><span class="line">    &#125;            </span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<p><img src="https://ftp.bmp.ovh/imgs/2020/02/26d3c5b736e77011.png" alt></p>
+<p>这样的代码在android中是不被允许的。</p>
+<p>所以，当子线程想要更新UI时，就需要调用主线程中的Handler对象，通过Handler向主线程传递消息来通知更新UI。需要注意的是当Handler被创建时，它就与创建它的线程绑定，且定义Handler都用静态内部类的方式。</p>
+<h4 id="Handler的使用"><a href="#Handler的使用" class="headerlink" title="Handler的使用"></a>Handler的使用</h4><ul>
+<li><p>sendMessage(Message)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> currentPos  = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> duration = <span class="number">2</span>;</span><br><span class="line">Bundle bundle = <span class="keyword">new</span> Bundle();</span><br><span class="line">bundle.putInt(<span class="string">"currentPos"</span>,currentPos);</span><br><span class="line">bundle.putInt(<span class="string">"duration"</span>,duration);</span><br><span class="line">Message msg  =  Message.obtain();</span><br><span class="line">msg.what = <span class="number">1</span>;<span class="comment">//标志消息的标志</span></span><br><span class="line">msg.setData(bundle);</span><br><span class="line">MainActivity.handler.sendMessage(msg);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>post(Runnable)<br>post与sendMessage本质上很相似，首先，他们都可以传递信息，其次，通过阅读源码可以看出post就是把Runnable对象打包进了一个Message，然后使用sendMessageDelayed方法发送。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">handler.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">        更新UI</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>handleMessage(Message)<br>处理Message，当Looper收到Message时，会自动调用它。</p>
+<h4 id="Handler-通信机制"><a href="#Handler-通信机制" class="headerlink" title="Handler 通信机制"></a>Handler 通信机制</h4></li>
+</ul>
+<p><img src="https://i.bmp.ovh/imgs/2020/03/bf967fb7ee375441.png" alt></p>
+<ul>
+<li>创建Handler，并采用当前线程的Looper创建消息循环系统；</li>
+<li>Handler通过sendMessage(Message)或Post(Runnable)发送消息，调用enqueueMessage把消息插入到消息链表中；</li>
+<li>Looper循环检测消息队列中的消息，若有消息则取出该消息，并调用该消息持有的handler的dispatchMessage方法，回调到创建Handler线程中重写的handleMessage里执行。</li>
+</ul>
 
       
 
@@ -259,7 +283,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
         		</li>
       		
 		</ul>
@@ -329,18 +353,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/02/21/本地用户文件名的修改/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          本地用户文件名的修改
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/11/24/MES开发记录--环境配置/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MES开发记录--环境配置</div>
+    <a href="/2020/03/24/cookie和session/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">cookie和session</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -367,7 +382,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是交换机？"><span class="toc-number">1.</span> <span class="toc-text">什么是交换机？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#它跟集线器的区别？"><span class="toc-number">2.</span> <span class="toc-text">它跟集线器的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交换机怎样实现单播？"><span class="toc-number">3.</span> <span class="toc-text">交换机怎样实现单播？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP协议"><span class="toc-number">4.</span> <span class="toc-text">ARP协议</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler是什么？"><span class="toc-number">1.</span> <span class="toc-text">Handler是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么需要Handler？"><span class="toc-number">2.</span> <span class="toc-text">为什么需要Handler？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler的使用"><span class="toc-number">3.</span> <span class="toc-text">Handler的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler-通信机制"><span class="toc-number">4.</span> <span class="toc-text">Handler 通信机制</span></a></li></ol>
                     </div>
                 </span>
             </div>

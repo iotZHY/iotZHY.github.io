@@ -20,7 +20,8 @@
 <meta property="og:description" content="产生的原因：  由于ip地址的短缺，一个机构内可以申请到的ip地址数远远小于机构内的主机数，且也考虑到互联网的安全性，也不会把所有的主机接入互联网。为了解决问题 RFC1918指明了一些专用地址 ，这些地址只能用于一个机构内通讯 ，而不能用于互联网上的通讯。互联网上的路由器 对目的地址时专用地址的数据报一律不转发。专用地址是全球不唯一的，可重复的，自然也就无法连入互联网。一共有三个地址块：（1）1">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://bkimg.cdn.bcebos.com/pic/0dd7912397dda144810a190cb2b7d0a20cf48608?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2U3Mg==,xp_5,yp_5">
-<meta property="og:updated_time" content="2020-03-22T04:10:58.567Z">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2020/03/65d04d3db84455b9.png">
+<meta property="og:updated_time" content="2020-03-23T00:14:42.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VPN与NAT">
 <meta name="twitter:description" content="产生的原因：  由于ip地址的短缺，一个机构内可以申请到的ip地址数远远小于机构内的主机数，且也考虑到互联网的安全性，也不会把所有的主机接入互联网。为了解决问题 RFC1918指明了一些专用地址 ，这些地址只能用于一个机构内通讯 ，而不能用于互联网上的通讯。互联网上的路由器 对目的地址时专用地址的数据报一律不转发。专用地址是全球不唯一的，可重复的，自然也就无法连入互联网。一共有三个地址块：（1）1">
@@ -208,7 +209,19 @@
 <li>动态转换：ip地址是多对多的，IP地址是不确定的，是随机的，所有被授权访问上Internet的私有IP地址可随机转换为任何指定的合法IP地址。动态转换可以使用多个合法外部地址集。当ISP提供的合法IP地址略少于网络内部的计算机数量时。可以采用动态转换的方式。</li>
 <li>端口多路复用（PAT)是指改变外出数据包的源端口并进行端口转换，即端口地址转换。ip地址一对多，内部网络的所有主机均可共享一个合法外部IP地址实现对Internet的访问，从而可以最大限度地节约IP地址资源。同时，又可隐藏网络内部的所有主机，有效避免来自internet的攻击。因此，目前网络中应用最多的就是端口多路复用方式。</li>
 </ul>
-<p>NAT工作流程：<br><img src="https://bkimg.cdn.bcebos.com/pic/0dd7912397dda144810a190cb2b7d0a20cf48608?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2U3Mg==,xp_5,yp_5" alt><br>第一步，局域网主机发出IP数据报（RES=192.168.1.100，DES=202.113.112.x），经过NAT网关时，NAT网关会根据它的映射表，修改数据报的源地址为一个合法的公网地址，这时的数据报变为（RES=202.113.113.x，DES=202.113.112.x），发送给服务器<br>第二部分，服务器收到后，以为给他发送消息的主机的ip为202.113.113.x，于是把请求到的数据发送给202.113.113.x，故发出的ip报文（RES=202.113.112.x，DES=202.113.113.x），经过NAT网关时，它把ip报文的目的地址根据映射表改为局域网内的ip，ip报文变为（RES=202.113.112.x，DES=192.168.1.100）</p>
+<p>NAT工作流程：<br><img src="https://bkimg.cdn.bcebos.com/pic/0dd7912397dda144810a190cb2b7d0a20cf48608?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2U3Mg==,xp_5,yp_5" alt></p>
+<ul>
+<li>第一步，局域网主机发出IP数据报（RES=192.168.1.100，DES=202.113.112.x），经过NAT网关时，NAT网关会根据它的映射表，修改数据报的源地址为一个合法的公网地址，这时的数据报变为（RES=202.113.113.x，DES=202.113.112.x），发送给服务器</li>
+<li>第二部分，服务器收到后，以为给他发送消息的主机的ip为202.113.113.x，于是把请求到的数据发送给202.113.113.x，故发出的ip报文（RES=202.113.112.x，DES=202.113.113.x），经过NAT网关时，它把ip报文的目的地址根据映射表改为局域网内的ip，ip报文变为（RES=202.113.112.x，DES=192.168.1.100）</li>
+</ul>
+<h4 id="VPN技术："><a href="#VPN技术：" class="headerlink" title="VPN技术："></a>VPN技术：</h4><p>虚拟专用网络(VPN)的功能是：在公用网络上建立专用网络，进行加密通讯。通常情况下，VPN网关采取双网卡结构，外网卡使用公网IP接入Internet。 同一组网中，各个网络的网段不能相同。</p>
+<p>VPN工作流程：<br><img src="https://i.bmp.ovh/imgs/2020/03/65d04d3db84455b9.png" alt></p>
+<ol>
+<li>网络一的VPN网关在接收到终端X发出的访问数据包时对其目标地址进行检查，如果目标地址属于网络二的地址，则将该数据包进行封装，封装的方式根据所采用的VPN技术不同而不同，同时VPN网关会构造一个新VPN数据包，并将封装后的原数据包作为VPN数据包的负载，VPN数据包的目标地址为网络二的VPN网关的外部地址。 </li>
+<li>网络一的VPN网关将VPN数据包发送到Internet，由于VPN数据包的目标地址是网络二的VPN网关的外部地址，所以该数据包将被Internet中的路由正确地发送到网络二的VPN网关。 </li>
+<li>网络二的VPN网关对接收到的数据包进行检查，如果发现该数据包是从网络一的VPN网关发出的，即可判定该数据包为VPN数据包，并对该数据包进行解包处理。解包的过程主要是先将VPN数据包的包头剥离，再将数据包反向处理还原成原始的数据包。 </li>
+<li>网络二的VPN网关将还原后的原始数据包发送至目标终端B，由于原始数据包的目标地址是终端B的IP，所以该数据包能够被正确地发送到终端B。在终端B看来，它收到的数据包就和从终端A直接发过来的一样。</li>
+</ol>
 
       
 
@@ -323,6 +336,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/03/23/git的简单使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          git的简单使用
+        
+      </div>
+    </a>
+  
   
     <a href="/2020/02/21/本地用户文件名的修改/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">本地用户文件名的修改</div>
@@ -352,7 +374,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#产生的原因："><span class="toc-number">1.</span> <span class="toc-text">产生的原因：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题："><span class="toc-number">2.</span> <span class="toc-text">问题：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT技术："><span class="toc-number">3.</span> <span class="toc-text">NAT技术：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#产生的原因："><span class="toc-number">1.</span> <span class="toc-text">产生的原因：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#问题："><span class="toc-number">2.</span> <span class="toc-text">问题：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT技术："><span class="toc-number">3.</span> <span class="toc-text">NAT技术：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VPN技术："><span class="toc-number">4.</span> <span class="toc-text">VPN技术：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -483,11 +505,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">IDEA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">插件安装, chrome</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">

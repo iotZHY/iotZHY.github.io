@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-22T04:10:58.567Z</updated>
+  <updated>2020-03-24T11:52:03.021Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,105 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>android的Handler机制</title>
+    <link href="http://yoursite.com/2020/03/24/android%E7%9A%84Handler%E6%9C%BA%E5%88%B6/"/>
+    <id>http://yoursite.com/2020/03/24/android的Handler机制/</id>
+    <published>2020-03-24T10:36:00.000Z</published>
+    <updated>2020-03-24T11:52:03.021Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Handler是什么？"><a href="#Handler是什么？" class="headerlink" title="Handler是什么？"></a>Handler是什么？</h4><p>在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”</p><a id="more"></a><ol><li>成员介绍 </li></ol><ul><li>Message：主要功能是进行消息的封装，同时可以指定消息的操作形式； </li><li>Looper：消息循环泵，用来为一个线程跑一个消息循环。每一个线程最多只可以拥有一个。 </li><li>MessageQueue：就是一个消息队列，存放消息的地方。每一个线程最多只可以拥有一个。 </li><li>Handler：消息的处理者，handler 负责将需要传递的信息封装成Message，发送给Looper，继而由Looper将Message放入MessageQueue中。当Looper对象看到MessageQueue中含有Message，就将其广播出去。该handler 对象收到该消息后，调用相应的handler 对象的handleMessage()方法对其进行处理。 </li></ul><ol start="2"><li>同线程各成员的关系及数量 </li></ol><ul><li>一个线程中只能有一个Looper，只能有一个MessageQueue，可以有多个Handler，多个Messge； </li><li>一个Looper只能维护唯一一个MessageQueue，可以接受多个Handler发来的消息； </li><li>一个Message只能属于唯一一个Handler； </li><li>同一个Handler只能处理自己发送给Looper的那些Message；<h4 id="为什么需要Handler？"><a href="#为什么需要Handler？" class="headerlink" title="为什么需要Handler？"></a>为什么需要Handler？</h4>最主要的原因是，在android中遵循单线程模型，子线程不允许访问UI，只有主线程才能访问UI。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread( <span class="keyword">new</span> Runnable() &#123;     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;     </span><br><span class="line">        myView.invalidate();    </span><br><span class="line">    &#125;            </span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure></li></ul><p>这样的代码在android中是不被允许的。</p><p>所以，当子线程想要更新UI时，就需要调用主线程中的Handler对象，通过Handler向主线程传递消息来通知更新UI。需要注意的是当Handler被创建时，它就与创建它的线程绑定，且定义Handler都用静态内部类的方式。</p><h4 id="Handler的使用"><a href="#Handler的使用" class="headerlink" title="Handler的使用"></a>Handler的使用</h4><ul><li><p>sendMessage(Message)</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> currentPos  = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> duration = <span class="number">2</span>;</span><br><span class="line">Bundle bundle = <span class="keyword">new</span> Bundle();</span><br><span class="line">bundle.putInt(<span class="string">"currentPos"</span>,currentPos);</span><br><span class="line">bundle.putInt(<span class="string">"duration"</span>,duration);</span><br><span class="line">Message msg  =  Message.obtain();</span><br><span class="line">msg.what = <span class="number">1</span>;<span class="comment">//标志消息的标志</span></span><br><span class="line">msg.setData(bundle);</span><br><span class="line">MainActivity.handler.sendMessage(msg);</span><br></pre></td></tr></table></figure></li><li><p>post(Runnable)<br>post与sendMessage本质上很相似，首先，他们都可以传递信息，其次，通过阅读源码可以看出post就是把Runnable对象打包进了一个Message，然后使用sendMessageDelayed方法发送。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">handler.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">        更新UI</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p>handleMessage(Message)<br>处理Message，当Looper收到Message时，会自动调用它。</p><h4 id="Handler-通信机制"><a href="#Handler-通信机制" class="headerlink" title="Handler 通信机制"></a>Handler 通信机制</h4></li></ul><p><img src="https://i.bmp.ovh/imgs/2020/03/bf967fb7ee375441.png" alt></p><ul><li>创建Handler，并采用当前线程的Looper创建消息循环系统；</li><li>Handler通过sendMessage(Message)或Post(Runnable)发送消息，调用enqueueMessage把消息插入到消息链表中；</li><li>Looper循环检测消息队列中的消息，若有消息则取出该消息，并调用该消息持有的handler的dispatchMessage方法，回调到创建Handler线程中重写的handleMessage里执行。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;Handler是什么？&quot;&gt;&lt;a href=&quot;#Handler是什么？&quot; class=&quot;headerlink&quot; title=&quot;Handler是什么？&quot;&gt;&lt;/a&gt;Handler是什么？&lt;/h4&gt;&lt;p&gt;在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="android" scheme="http://yoursite.com/tags/android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cookie和session</title>
+    <link href="http://yoursite.com/2020/03/24/cookie%E5%92%8Csession/"/>
+    <id>http://yoursite.com/2020/03/24/cookie和session/</id>
+    <published>2020-03-24T02:43:44.000Z</published>
+    <updated>2020-03-24T02:49:28.743Z</updated>
+    
+    <content type="html"><![CDATA[<p>………..</p><a id="more"></a><h5 id="一、cookie："><a href="#一、cookie：" class="headerlink" title="一、cookie："></a>一、cookie：</h5><p>在网站中，http请求是无状态的。也就是说即使第一次和服务器连接后并且登录成功后，第二次请求服务器依然不能知道当前请求是哪个用户。cookie的出现就是为了解决这个问题，第一次登录后服务器返回一些数据（cookie）给浏览器，然后浏览器保存在本地，当该用户发送第二次请求的时候，就会自动的把上次请求存储的cookie数据自动的携带给服务器，服务器通过浏览器携带的数据就能判断当前用户是哪个了。cookie存储的数据量有限，不同的浏览器有不同的存储大小，但一般不超过4KB。因此使用cookie只能存储一些小量的数据。</p><h5 id="二、session"><a href="#二、session" class="headerlink" title="二、session:"></a>二、session:</h5><p>session和cookie的作用有点类似，都是为了存储用户相关的信息。不同的是，cookie是存储在本地浏览器，而session存储在服务器。存储在服务器的数据会更加的安全，不容易被窃取。但存储在服务器也有一定的弊端，就是会占用服务器的资源，但现在服务器已经发展至今，一些session信息还是绰绰有余的。</p><h5 id="三、cookie和session结合使用："><a href="#三、cookie和session结合使用：" class="headerlink" title="三、cookie和session结合使用："></a>三、cookie和session结合使用：</h5><p>web开发发展至今，cookie和session的使用已经出现了一些非常成熟的方案。在如今的市场或者企业里，一般有两种存储方式：</p><ol><li>存储在服务端：通过cookie存储一个session_id，然后具体的数据则是保存在session中。如果用户已经登录，则服务器会在cookie中保存一个session_id，下次再次请求的时候，会把该session_id携带上来，服务器根据session_id在session库中获取用户的session数据。就能知道该用户到底是谁，以及之前保存的一些状态信息。这种专业术语叫做server side session。</li></ol><ol start="2"><li>将session数据加密，然后存储在cookie中。这种专业术语叫做client side session。flask采用的就是这种方式，但是也可以替换成其他形式。</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;………..&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="web" scheme="http://yoursite.com/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDEA快捷键</title>
+    <link href="http://yoursite.com/2020/03/23/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <id>http://yoursite.com/2020/03/23/IDEA快捷键/</id>
+    <published>2020-03-23T13:06:10.000Z</published>
+    <updated>2020-03-24T02:47:35.396Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>ctrl+p: 查看函数参数情况</li><li>双击shift：搜索框</li><li>shift+回车：不管光标在哪，都会开始下一行</li><li>ctrl+shift+f12: 代码编辑框，最大化和还原</li><li>alt+ins：generate，可以产生geter，seter方法</li><li>ctrl+shift+v</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;ctrl+p: 查看函数参数情况&lt;/li&gt;
+&lt;li&gt;双击shift：搜索框&lt;/li&gt;
+&lt;li&gt;shift+回车：不管光标在哪，都会开始下一行&lt;/li&gt;
+&lt;li&gt;ctrl+shift+f12: 代码编辑框，最大化和还原&lt;/li&gt;
+&lt;li&gt;alt+ins：gener
+      
+    
+    </summary>
+    
+    
+    
+      <category term="IDEA" scheme="http://yoursite.com/tags/IDEA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git的简单使用</title>
+    <link href="http://yoursite.com/2020/03/23/git%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2020/03/23/git的简单使用/</id>
+    <published>2020-03-23T09:16:22.000Z</published>
+    <updated>2020-03-24T04:46:56.613Z</updated>
+    
+    <content type="html"><![CDATA[<p>………..</p><a id="more"></a><h6 id="这是一个简单的新建一个git仓库，并新建一个SSH密钥，最后上传自己项目的博客"><a href="#这是一个简单的新建一个git仓库，并新建一个SSH密钥，最后上传自己项目的博客" class="headerlink" title="这是一个简单的新建一个git仓库，并新建一个SSH密钥，最后上传自己项目的博客"></a>这是一个简单的新建一个git仓库，并新建一个SSH密钥，最后上传自己项目的博客</h6><h4 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h4><p>这步很简单，不过多介绍，这是新建后的仓库的样子<br><img src="https://i.bmp.ovh/imgs/2020/03/48b87afcfa5ca51a.png" alt><br>这里给出了三种情况，第一种是你没有一个仓库；第二种是你已经有了一个本地的仓库；第三种是你要从其他仓库导入。<br>下面给出 了git的一些命令，我们完全可以把它copy过来在git的命令行里运行，但是在这之前如果没有ssh密钥的，需要新建一个。 </p><h4 id="新建SSH密钥"><a href="#新建SSH密钥" class="headerlink" title="新建SSH密钥"></a>新建SSH密钥</h4><p>点击setting，在里面找到Deploy keys，进入。<br><img src="https://i.bmp.ovh/imgs/2020/03/21a10ce1db4c346b.png" alt><br>因为，我们是 第一次使用，所以我需要在我本地，新建一个SSH密钥（新建一次即可，下次只需把这个密钥加到github）。点击“guide on deploy keys ”的 超链接跟随它的英文教程，一步步进行即可。<br>这是我对它教程的一个总结：</p><h6 id="创建一个新的SSH-key："><a href="#创建一个新的SSH-key：" class="headerlink" title="创建一个新的SSH key："></a>创建一个新的SSH key：</h6><ol><li>打开git bash</li><li>把下面的换成你的邮箱<br><code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code> </li><li>下面会弹出对话，问你把密钥存在那个地方，一般直接回车存在C盘下面<br><code>Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):</code></li><li>下面会让你输入两次密码： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase): [Type a passphrase]</span><br><span class="line">Enter same passphrase again: [Type passphrase again]</span><br></pre></td></tr></table></figure></li></ol><h6 id="将SSH密钥添加到SSH-agent："><a href="#将SSH密钥添加到SSH-agent：" class="headerlink" title="将SSH密钥添加到SSH-agent："></a>将SSH密钥添加到SSH-agent：</h6><ol><li>打开ssh-agent<br><code>eval `ssh-agent`</code></li><li>加入<br><code>ssh-add ~/.ssh/id_rsa</code><h6 id="将ssh-key添加到github："><a href="#将ssh-key添加到github：" class="headerlink" title="将ssh-key添加到github："></a>将ssh-key添加到github：</h6></li><li>复制你的公钥<br><code>clip &lt; ~/.ssh/id_rsa.pub</code><br>也可以去存储密钥的文件直接复制id_rsa.pub里的内容</li><li>去到这个界面，点击“Add deploy key”<br><img src="https://i.bmp.ovh/imgs/2020/03/21a10ce1db4c346b.png" alt></li><li>填写tital，粘贴公钥，最后勾选“Allow write access”<br><img src="https://i.bmp.ovh/imgs/2020/03/8c7250f09bb4025f.png" alt></li></ol><h4 id="上传项目到github"><a href="#上传项目到github" class="headerlink" title="上传项目到github"></a>上传项目到github</h4><ol><li>到你想要上传项目的文件夹下<br><code>git init</code></li><li>可以为你的项目添加一个README<br><code>git add README.md</code></li><li>把上传到文件添加到缓存<br><code>git add .</code></li><li>查看git的状态<br><code>git status</code></li><li>提交,-m表示这次提交的备注<br><code>git commit -m &quot;first commit&quot;</code></li><li>添加远程主机<br><code>git remote add origin https://github.com/iotZHY/demo.git</code></li><li>push<br><code>git push -u origin master</code><h4 id="git命令的进阶学习（持续更新-）"><a href="#git命令的进阶学习（持续更新-）" class="headerlink" title="git命令的进阶学习（持续更新 ）"></a>git命令的进阶学习（持续更新 ）</h4></li></ol><ul><li>git commit –amend，也叫追加提交<br>情景：如果我们不小心提交了一版我们不满意的代码，并且给它推送到服务器了，在代码没被merge之前我们希望再修改一版满意的，而如果我们不想在服务器上abondon，它可以在不增加一个新的commit-id的情况下将新修改的代码追加到前一次的commit-id中。</li><li>git pull:从远端拉取仓库，用于多人协作开发同步</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;………..&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="github" scheme="http://yoursite.com/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title>VPN与NAT</title>
     <link href="http://yoursite.com/2020/03/22/VPN%E4%B8%8ENAT/"/>
     <id>http://yoursite.com/2020/03/22/VPN与NAT/</id>
     <published>2020-03-22T02:33:40.000Z</published>
-    <updated>2020-03-22T04:10:58.567Z</updated>
+    <updated>2020-03-23T00:14:42.784Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="产生的原因："><a href="#产生的原因：" class="headerlink" title="产生的原因："></a>产生的原因：</h4><p>  由于ip地址的短缺，一个机构内可以申请到的ip地址数远远小于机构内的主机数，且也考虑到互联网的安全性，也不会把所有的主机接入互联网。为了解决问题 RFC1918指明了一些专用地址 ，这些地址只能用于一个机构内通讯 ，而不能用于互联网上的通讯。互联网上的路由器 对目的地址时专用地址的数据报一律不转发。专用地址是全球不唯一的，可重复的，自然也就无法连入互联网。一共有三个地址块：<br>（1）10.0.0.0——10.255.255.255<br>（2）172.16.0.0——172.31.255.255<br>（3）192.168.0.0——192.168.255.255</p><a id="more"></a><h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>如果这些机构内的主机想要和互联网上的主机通信时该咋办呢？<br>如何连接两个异地的局域网？</p><h4 id="NAT技术："><a href="#NAT技术：" class="headerlink" title="NAT技术："></a>NAT技术：</h4><p>NAT（Network Address Translation，网络地址转换）是1994年提出的。当在专用网内部的一些主机本来已经分配到了本地IP地址（即仅在本专用网内使用的专用地址），但现在又想和因特网上的主机通信（并不需要加密）时，可使用NAT方法。<br>NAT的实现方式有三种，即静态转换Static Nat、动态转换Dynamic Nat和端口多路复用OverLoad。</p><ul><li>静态转换：IP地址对是一对一的，是一成不变的，某个私有IP地址只转换为某个公有IP地址。</li><li>动态转换：ip地址是多对多的，IP地址是不确定的，是随机的，所有被授权访问上Internet的私有IP地址可随机转换为任何指定的合法IP地址。动态转换可以使用多个合法外部地址集。当ISP提供的合法IP地址略少于网络内部的计算机数量时。可以采用动态转换的方式。</li><li>端口多路复用（PAT)是指改变外出数据包的源端口并进行端口转换，即端口地址转换。ip地址一对多，内部网络的所有主机均可共享一个合法外部IP地址实现对Internet的访问，从而可以最大限度地节约IP地址资源。同时，又可隐藏网络内部的所有主机，有效避免来自internet的攻击。因此，目前网络中应用最多的就是端口多路复用方式。</li></ul><p>NAT工作流程：<br><img src="https://bkimg.cdn.bcebos.com/pic/0dd7912397dda144810a190cb2b7d0a20cf48608?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2U3Mg==,xp_5,yp_5" alt><br>第一步，局域网主机发出IP数据报（RES=192.168.1.100，DES=202.113.112.x），经过NAT网关时，NAT网关会根据它的映射表，修改数据报的源地址为一个合法的公网地址，这时的数据报变为（RES=202.113.113.x，DES=202.113.112.x），发送给服务器<br>第二部分，服务器收到后，以为给他发送消息的主机的ip为202.113.113.x，于是把请求到的数据发送给202.113.113.x，故发出的ip报文（RES=202.113.112.x，DES=202.113.113.x），经过NAT网关时，它把ip报文的目的地址根据映射表改为局域网内的ip，ip报文变为（RES=202.113.112.x，DES=192.168.1.100）</p>]]></content>
+    <content type="html"><![CDATA[<h4 id="产生的原因："><a href="#产生的原因：" class="headerlink" title="产生的原因："></a>产生的原因：</h4><p>  由于ip地址的短缺，一个机构内可以申请到的ip地址数远远小于机构内的主机数，且也考虑到互联网的安全性，也不会把所有的主机接入互联网。为了解决问题 RFC1918指明了一些专用地址 ，这些地址只能用于一个机构内通讯 ，而不能用于互联网上的通讯。互联网上的路由器 对目的地址时专用地址的数据报一律不转发。专用地址是全球不唯一的，可重复的，自然也就无法连入互联网。一共有三个地址块：<br>（1）10.0.0.0——10.255.255.255<br>（2）172.16.0.0——172.31.255.255<br>（3）192.168.0.0——192.168.255.255</p><a id="more"></a><h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><p>如果这些机构内的主机想要和互联网上的主机通信时该咋办呢？<br>如何连接两个异地的局域网？</p><h4 id="NAT技术："><a href="#NAT技术：" class="headerlink" title="NAT技术："></a>NAT技术：</h4><p>NAT（Network Address Translation，网络地址转换）是1994年提出的。当在专用网内部的一些主机本来已经分配到了本地IP地址（即仅在本专用网内使用的专用地址），但现在又想和因特网上的主机通信（并不需要加密）时，可使用NAT方法。<br>NAT的实现方式有三种，即静态转换Static Nat、动态转换Dynamic Nat和端口多路复用OverLoad。</p><ul><li>静态转换：IP地址对是一对一的，是一成不变的，某个私有IP地址只转换为某个公有IP地址。</li><li>动态转换：ip地址是多对多的，IP地址是不确定的，是随机的，所有被授权访问上Internet的私有IP地址可随机转换为任何指定的合法IP地址。动态转换可以使用多个合法外部地址集。当ISP提供的合法IP地址略少于网络内部的计算机数量时。可以采用动态转换的方式。</li><li>端口多路复用（PAT)是指改变外出数据包的源端口并进行端口转换，即端口地址转换。ip地址一对多，内部网络的所有主机均可共享一个合法外部IP地址实现对Internet的访问，从而可以最大限度地节约IP地址资源。同时，又可隐藏网络内部的所有主机，有效避免来自internet的攻击。因此，目前网络中应用最多的就是端口多路复用方式。</li></ul><p>NAT工作流程：<br><img src="https://bkimg.cdn.bcebos.com/pic/0dd7912397dda144810a190cb2b7d0a20cf48608?x-bce-process=image/watermark,g_7,image_d2F0ZXIvYmFpa2U3Mg==,xp_5,yp_5" alt></p><ul><li>第一步，局域网主机发出IP数据报（RES=192.168.1.100，DES=202.113.112.x），经过NAT网关时，NAT网关会根据它的映射表，修改数据报的源地址为一个合法的公网地址，这时的数据报变为（RES=202.113.113.x，DES=202.113.112.x），发送给服务器</li><li>第二部分，服务器收到后，以为给他发送消息的主机的ip为202.113.113.x，于是把请求到的数据发送给202.113.113.x，故发出的ip报文（RES=202.113.112.x，DES=202.113.113.x），经过NAT网关时，它把ip报文的目的地址根据映射表改为局域网内的ip，ip报文变为（RES=202.113.112.x，DES=192.168.1.100）</li></ul><h4 id="VPN技术："><a href="#VPN技术：" class="headerlink" title="VPN技术："></a>VPN技术：</h4><p>虚拟专用网络(VPN)的功能是：在公用网络上建立专用网络，进行加密通讯。通常情况下，VPN网关采取双网卡结构，外网卡使用公网IP接入Internet。 同一组网中，各个网络的网段不能相同。</p><p>VPN工作流程：<br><img src="https://i.bmp.ovh/imgs/2020/03/65d04d3db84455b9.png" alt></p><ol><li>网络一的VPN网关在接收到终端X发出的访问数据包时对其目标地址进行检查，如果目标地址属于网络二的地址，则将该数据包进行封装，封装的方式根据所采用的VPN技术不同而不同，同时VPN网关会构造一个新VPN数据包，并将封装后的原数据包作为VPN数据包的负载，VPN数据包的目标地址为网络二的VPN网关的外部地址。 </li><li>网络一的VPN网关将VPN数据包发送到Internet，由于VPN数据包的目标地址是网络二的VPN网关的外部地址，所以该数据包将被Internet中的路由正确地发送到网络二的VPN网关。 </li><li>网络二的VPN网关对接收到的数据包进行检查，如果发现该数据包是从网络一的VPN网关发出的，即可判定该数据包为VPN数据包，并对该数据包进行解包处理。解包的过程主要是先将VPN数据包的包头剥离，再将数据包反向处理还原成原始的数据包。 </li><li>网络二的VPN网关将还原后的原始数据包发送至目标终端B，由于原始数据包的目标地址是终端B的IP，所以该数据包能够被正确地发送到终端B。在终端B看来，它收到的数据包就和从终端A直接发过来的一样。</li></ol>]]></content>
     
     <summary type="html">
     
