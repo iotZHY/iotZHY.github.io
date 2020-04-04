@@ -223,19 +223,17 @@
 <hr>
 <h4 id="Markdown的基本语法"><a href="#Markdown的基本语法" class="headerlink" title="Markdown的基本语法"></a>Markdown的基本语法</h4><h6 id="一-标题"><a href="#一-标题" class="headerlink" title="一.标题"></a>一.标题</h6><blockquote>
 <p>支持多级标题，以#的数量表示标题的级数，级数越高，标题的字体越小。</p>
-</blockquote>
 <h6 id="二-字体格式"><a href="#二-字体格式" class="headerlink" title="二.字体格式"></a>二.字体格式</h6><ul>
-<li><p><strong>倾斜</strong></p>
-<p>  <code>文字左右两边各有一个*</code></p>
-</li>
-<li><p><strong>加粗</strong><br>  <code>文字左右两边各有两个*</code> </p>
-</li>
+<li><strong>倾斜</strong></li>
+</ul>
+</blockquote>
+<pre><code>`文字左右两边各有一个*`
+</code></pre><ul>
+<li><strong>加粗</strong><br>  <code>文字左右两边各有两个*</code> </li>
 <li><p><strong>倾斜加粗</strong></p>
 <p>  <code>文字左右两边各有三个*</code></p>
 </li>
-<li><p><strong>删除线</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文字左右两边各有~~</span><br><span class="line">例：~~zhy~~</span><br></pre></td></tr></table></figure>
-
+<li><strong>删除线</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文字左右两边各有~~</span><br><span class="line">例：~~zhy~~</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h6 id="三-分割线"><a href="#三-分割线" class="headerlink" title="三.分割线"></a>三.分割线</h6><ul>
@@ -244,25 +242,15 @@
 </li>
 <li><p>图片alt就是显示在图片下面的文字，相当于对图片内容的解释。</p>
 </li>
-<li><p>图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</p>
-<h6 id="五-超链接"><a href="#五-超链接" class="headerlink" title="五.超链接"></a>五.超链接</h6><p><code>[超链接名](超链接地址 &quot;超链接title&quot;)</code></p>
-</li>
-<li><p>和图片很相似，title可加可不加</p>
-<h6 id="六-列表"><a href="#六-列表" class="headerlink" title="六.列表"></a>六.列表</h6></li>
-<li><p>无序列表</p>
-</li>
+<li>图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加<h6 id="五-超链接"><a href="#五-超链接" class="headerlink" title="五.超链接"></a>五.超链接</h6><code>[超链接名](超链接地址 &quot;超链接title&quot;)</code></li>
+<li>和图片很相似，title可加可不加<h6 id="六-列表"><a href="#六-列表" class="headerlink" title="六.列表"></a>六.列表</h6></li>
+<li>无序列表</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+列表内容</span><br><span class="line">+列表内容</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">+换成 - ，* 都可以</span><br><span class="line">注意：+与内容见有一个空格</span><br></pre></td></tr></table></figure>
-
-
-
 <ul>
 <li>有序列表</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 列表内容</span><br><span class="line">2. 列表内容</span><br><span class="line">3. 列表内容</span><br><span class="line">注意：序号跟内容之间要有空格</span><br></pre></td></tr></table></figure>
-
-
-
 <h6 id="七-代码"><a href="#七-代码" class="headerlink" title="七.代码"></a>七.代码</h6><ul>
 <li>单行</li>
 </ul>
@@ -562,7 +550,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">网络安全，加密，RSA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode, Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -743,5 +743,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 </body>
 </html>

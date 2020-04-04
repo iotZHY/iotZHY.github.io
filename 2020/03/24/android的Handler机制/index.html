@@ -199,8 +199,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Handler是什么？"><a href="#Handler是什么？" class="headerlink" title="Handler是什么？"></a>Handler是什么？</h4><p>在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”</p>
-<a id="more"></a>
+        <h4 id="Handler是什么？"><a href="#Handler是什么？" class="headerlink" title="Handler是什么？"></a>Handler是什么？</h4><p>在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”<br><a id="more"></a></p>
 <ol>
 <li>成员介绍 </li>
 </ol>
@@ -210,7 +209,7 @@
 <li>MessageQueue：就是一个消息队列，存放消息的地方。每一个线程最多只可以拥有一个。 </li>
 <li>Handler：消息的处理者，handler 负责将需要传递的信息封装成Message，发送给Looper，继而由Looper将Message放入MessageQueue中。当Looper对象看到MessageQueue中含有Message，就将其广播出去。该handler 对象收到该消息后，调用相应的handler 对象的handleMessage()方法对其进行处理。 </li>
 </ul>
-<ol start="2">
+<ol>
 <li>同线程各成员的关系及数量 </li>
 </ol>
 <ul>
@@ -218,7 +217,6 @@
 <li>一个Looper只能维护唯一一个MessageQueue，可以接受多个Handler发来的消息； </li>
 <li>一个Message只能属于唯一一个Handler； </li>
 <li>同一个Handler只能处理自己发送给Looper的那些Message；<h4 id="为什么需要Handler？"><a href="#为什么需要Handler？" class="headerlink" title="为什么需要Handler？"></a>为什么需要Handler？</h4>最主要的原因是，在android中遵循单线程模型，子线程不允许访问UI，只有主线程才能访问UI。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread( <span class="keyword">new</span> Runnable() &#123;     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;     </span><br><span class="line">        myView.invalidate();    </span><br><span class="line">    &#125;            </span><br><span class="line">&#125;).start();</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <p>这样的代码在android中是不被允许的。</p>
@@ -352,6 +350,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/03/25/RSA加密原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          RSA加密原理
+        
+      </div>
+    </a>
   
   
     <a href="/2020/03/24/cookie和session/" id="article-nav-older" class="article-nav-link-wrap">
@@ -517,7 +524,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">网络安全，加密，RSA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode, Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,5 +717,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 </body>
 </html>

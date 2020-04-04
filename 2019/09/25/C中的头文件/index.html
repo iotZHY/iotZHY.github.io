@@ -11,18 +11,18 @@
   
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-  <meta name="description" content="最先了解的知识 系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用””包含；  #include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的； 查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找； 变量，函数可以重复定义，但不可以重复定义。">
+  <meta name="description" content="最先了解的知识 系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用””包含；  include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的； 查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找； 变量，函数可以重复定义，但不可以重复定义。">
 <meta name="keywords" content="c语言,随笔">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C中的头文件">
 <meta property="og:url" content="http://yoursite.com/2019/09/25/C中的头文件/index.html">
 <meta property="og:site_name" content="ZHY的hexo博客">
-<meta property="og:description" content="最先了解的知识 系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用””包含；  #include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的； 查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找； 变量，函数可以重复定义，但不可以重复定义。">
+<meta property="og:description" content="最先了解的知识 系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用””包含；  include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的； 查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找； 变量，函数可以重复定义，但不可以重复定义。">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-02-21T12:11:27.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C中的头文件">
-<meta name="twitter:description" content="最先了解的知识 系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用””包含；  #include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的； 查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找； 变量，函数可以重复定义，但不可以重复定义。">
+<meta name="twitter:description" content="最先了解的知识 系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用””包含；  include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的； 查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找； 变量，函数可以重复定义，但不可以重复定义。">
   
     <link rel="alternative" href="/atom.xml" title="ZHY的hexo博客" type="application/atom+xml">
   
@@ -199,17 +199,16 @@
       
         <h3 id="最先了解的知识"><a href="#最先了解的知识" class="headerlink" title="最先了解的知识"></a>最先了解的知识</h3><ol>
 <li>系统自带的头文件，用&lt;&gt;包含,自定义的头文件，用””包含； </li>
-<li>#include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；</li>
+<li><h1 id="include-预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；"><a href="#include-预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；" class="headerlink" title="include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；"></a>include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；</h1></li>
 <li>查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&lt;&gt;的文件，直接从系统默认路径查找；</li>
 <li>变量，函数可以重复定义，但不可以重复定义。<a id="more"></a>
 </li>
 </ol>
 <hr>
 <h3 id="头文件写法"><a href="#头文件写法" class="headerlink" title="头文件写法"></a>头文件写法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#ifndef MY_POINT </span><br><span class="line">#define MY_POINT </span><br><span class="line">... </span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>这类语句，用于控制#define 与 #endif之间的内容不被重复定义或插入。</li>
-<li>#define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。</li>
+<li><h1 id="define与-endif之间可以写一下宏定义，函数定义，变量声明之类的。"><a href="#define与-endif之间可以写一下宏定义，函数定义，变量声明之类的。" class="headerlink" title="define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。"></a>define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。</h1></li>
 <li>我们有时写c程序时，也可以把所有的声明都放到一个头文件中，然后在源文件中 #include”xxx.h”,这样会使你的程序看上去更简洁。</li>
 </ul>
 <hr>
@@ -366,7 +365,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#最先了解的知识"><span class="toc-number">1.</span> <span class="toc-text">最先了解的知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#头文件写法"><span class="toc-number">2.</span> <span class="toc-text">头文件写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用头文件的好处"><span class="toc-number">3.</span> <span class="toc-text">使用头文件的好处</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#最先了解的知识"><span class="toc-number">1.</span> <span class="toc-text">最先了解的知识</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#include-预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；"><span class="toc-number"></span> <span class="toc-text">include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#头文件写法"><span class="toc-number">1.</span> <span class="toc-text">头文件写法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define与-endif之间可以写一下宏定义，函数定义，变量声明之类的。"><span class="toc-number"></span> <span class="toc-text">define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用头文件的好处"><span class="toc-number">1.</span> <span class="toc-text">使用头文件的好处</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -501,7 +500,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">网络安全，加密，RSA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode, Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -682,5 +693,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 </body>
 </html>

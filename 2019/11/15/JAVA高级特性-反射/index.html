@@ -198,8 +198,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h4><p>Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。<br>我感觉这个动态性，是大家使用反射的最重要的原因，我们可以通过反射并且根据自己的需求，动态的调用一个类的方法。</p>
-<h4 id="怎么反射？"><a href="#怎么反射？" class="headerlink" title="怎么反射？"></a>怎么反射？</h4><p>反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法</p>
-<a id="more"></a>
+<h4 id="怎么反射？"><a href="#怎么反射？" class="headerlink" title="怎么反射？"></a>怎么反射？</h4><p>反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法<br><a id="more"></a></p>
 <h5 id="加载类的三种方法"><a href="#加载类的三种方法" class="headerlink" title="加载类的三种方法"></a>加载类的三种方法</h5><ol>
 <li><p>使用Class类的静态方法forName()</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    //forName里面使用完整类的路径</span><br><span class="line">    Class clazz =Class.forName(&quot;exp.Person&quot;);</span><br><span class="line">&#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -209,7 +208,6 @@
 </li>
 <li><p>使用这个类的静态变量class</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class clazz = Person.class;</span><br><span class="line">//这个方式简单粗暴个人很喜欢</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <h5 id="解剖类的方法"><a href="#解剖类的方法" class="headerlink" title="解剖类的方法"></a>解剖类的方法</h5><ol>
@@ -218,20 +216,15 @@
 </li>
 <li><p>public Method getMethod() //方法</p>
 </li>
-<li><p>public Field getField() //字段，成员方法，只返回public修饰的</p>
-<h6 id="前面三种方式只能返回，修饰符是public的成员"><a href="#前面三种方式只能返回，修饰符是public的成员" class="headerlink" title="//前面三种方式只能返回，修饰符是public的成员"></a>//前面三种方式只能返回，修饰符是public的成员</h6></li>
-<li><p>public Constructor getDeclaredConstructor() /构造函数</p>
-</li>
-<li><p>public Method getDeclaredMethod() //方法</p>
-</li>
-<li><p>public Field getDeclaredField() //字段，成员方法除public外</p>
-</li>
+<li>public Field getField() //字段，成员方法，只返回public修饰的<h6 id="前面三种方式只能返回，修饰符是public的成员"><a href="#前面三种方式只能返回，修饰符是public的成员" class="headerlink" title="//前面三种方式只能返回，修饰符是public的成员"></a>//前面三种方式只能返回，修饰符是public的成员</h6></li>
+<li>public Constructor getDeclaredConstructor() /构造函数</li>
+<li>public Method getDeclaredMethod() //方法</li>
+<li>public Field getDeclaredField() //字段，成员方法除public外</li>
 </ol>
 <ul>
 <li>可以不用获得构造函数直接获得对象,但只限于无参的构造函数<br><code>clazz.newInstance()</code></li>
 <li>私有的成员只能在内部被访问，但是反射可以实现访问私有成员,使用<br><code>setAccessible（true）;</code></li>
 <li>执行方法: invoke()方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package exp;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.InvocationTargetException;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class ReflectDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Class clazz = new Person().getClass();</span><br><span class="line">        try &#123;</span><br><span class="line">            Method method = clazz.getMethod(&quot;run&quot;);</span><br><span class="line">            Object obj = method.invoke(clazz.newInstance());</span><br><span class="line">            System.out.println(obj);</span><br><span class="line"></span><br><span class="line">        &#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 
@@ -510,7 +503,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">网络安全，加密，RSA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode, Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -691,5 +696,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 </body>
 </html>

@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2020/03/21a10ce1db4c346b.png">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2020/03/21a10ce1db4c346b.png">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2020/03/8c7250f09bb4025f.png">
-<meta property="og:updated_time" content="2020-03-24T04:46:56.613Z">
+<meta property="og:updated_time" content="2020-04-03T10:38:52.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git的简单使用">
 <meta name="twitter:description" content="………..">
@@ -202,8 +202,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>………..</p>
-<a id="more"></a>
+        <p>………..<br><a id="more"></a></p>
 <h6 id="这是一个简单的新建一个git仓库，并新建一个SSH密钥，最后上传自己项目的博客"><a href="#这是一个简单的新建一个git仓库，并新建一个SSH密钥，最后上传自己项目的博客" class="headerlink" title="这是一个简单的新建一个git仓库，并新建一个SSH密钥，最后上传自己项目的博客"></a>这是一个简单的新建一个git仓库，并新建一个SSH密钥，最后上传自己项目的博客</h6><h4 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h4><p>这步很简单，不过多介绍，这是新建后的仓库的样子<br><img src="https://i.bmp.ovh/imgs/2020/03/48b87afcfa5ca51a.png" alt><br>这里给出了三种情况，第一种是你没有一个仓库；第二种是你已经有了一个本地的仓库；第三种是你要从其他仓库导入。<br>下面给出 了git的一些命令，我们完全可以把它copy过来在git的命令行里运行，但是在这之前如果没有ssh密钥的，需要新建一个。 </p>
 <h4 id="新建SSH密钥"><a href="#新建SSH密钥" class="headerlink" title="新建SSH密钥"></a>新建SSH密钥</h4><p>点击setting，在里面找到Deploy keys，进入。<br><img src="https://i.bmp.ovh/imgs/2020/03/21a10ce1db4c346b.png" alt><br>因为，我们是 第一次使用，所以我需要在我本地，新建一个SSH密钥（新建一次即可，下次只需把这个密钥加到github）。点击“guide on deploy keys ”的 超链接跟随它的英文教程，一步步进行即可。<br>这是我对它教程的一个总结：</p>
 <h6 id="创建一个新的SSH-key："><a href="#创建一个新的SSH-key：" class="headerlink" title="创建一个新的SSH key："></a>创建一个新的SSH key：</h6><ol>
@@ -211,11 +210,10 @@
 <li>把下面的换成你的邮箱<br><code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code> </li>
 <li>下面会弹出对话，问你把密钥存在那个地方，一般直接回车存在C盘下面<br><code>Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):</code></li>
 <li>下面会让你输入两次密码： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Enter passphrase (empty for no passphrase): [Type a passphrase]</span><br><span class="line">Enter same passphrase again: [Type passphrase again]</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <h6 id="将SSH密钥添加到SSH-agent："><a href="#将SSH密钥添加到SSH-agent：" class="headerlink" title="将SSH密钥添加到SSH-agent："></a>将SSH密钥添加到SSH-agent：</h6><ol>
-<li>打开ssh-agent<br><code>eval `ssh-agent`</code></li>
+<li>打开ssh-agent<br><code>eval `ssh-agent` </code></li>
 <li>加入<br><code>ssh-add ~/.ssh/id_rsa</code><h6 id="将ssh-key添加到github："><a href="#将ssh-key添加到github：" class="headerlink" title="将ssh-key添加到github："></a>将ssh-key添加到github：</h6></li>
 <li>复制你的公钥<br><code>clip &lt; ~/.ssh/id_rsa.pub</code><br>也可以去存储密钥的文件直接复制id_rsa.pub里的内容</li>
 <li>去到这个界面，点击“Add deploy key”<br><img src="https://i.bmp.ovh/imgs/2020/03/21a10ce1db4c346b.png" alt></li>
@@ -231,8 +229,9 @@
 <li>push<br><code>git push -u origin master</code><h4 id="git命令的进阶学习（持续更新-）"><a href="#git命令的进阶学习（持续更新-）" class="headerlink" title="git命令的进阶学习（持续更新 ）"></a>git命令的进阶学习（持续更新 ）</h4></li>
 </ol>
 <ul>
-<li>git commit –amend，也叫追加提交<br>情景：如果我们不小心提交了一版我们不满意的代码，并且给它推送到服务器了，在代码没被merge之前我们希望再修改一版满意的，而如果我们不想在服务器上abondon，它可以在不增加一个新的commit-id的情况下将新修改的代码追加到前一次的commit-id中。</li>
+<li>git commit —amend，也叫追加提交<br>情景：如果我们不小心提交了一版我们不满意的代码，并且给它推送到服务器了，在代码没被merge之前我们希望再修改一版满意的，而如果我们不想在服务器上abondon，它可以在不增加一个新的commit-id的情况下将新修改的代码追加到前一次的commit-id中。</li>
 <li>git pull:从远端拉取仓库，用于多人协作开发同步</li>
+<li>git checkout -b 分支名:新建 一个分支，并切换到该分支</li>
 </ul>
 
       
@@ -521,7 +520,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">网络安全，加密，RSA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode, Vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -702,5 +713,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 </body>
 </html>
