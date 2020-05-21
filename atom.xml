@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-11T10:17:03.701Z</updated>
+  <updated>2020-05-21T16:03:11.014Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据挖掘-多路数组聚集</title>
+    <link href="http://yoursite.com/2020/05/21/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-%E5%A4%9A%E8%B7%AF%E6%95%B0%E7%BB%84%E8%81%9A%E9%9B%86/"/>
+    <id>http://yoursite.com/2020/05/21/数据挖掘-多路数组聚集/</id>
+    <published>2020-05-21T14:58:10.000Z</published>
+    <updated>2020-05-21T16:03:11.014Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>刚刚在写作业时，遇到了多路数组聚集的题，因为老师讲的实在枯燥，这块没太弄明白，故课下费了好大的劲，终于想明白。特地记下，方便以后查看。<br><a id="more"></a></p><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>一道类似的题：<br>基本立方体有三维A，B，C，其单元数分别为40，400，4000，每维均等分成4块，且一个立方体单元存储度量需要4byte</p><p>1）维度聚集的顺序？<br>2）计算2-D立方体，所需的最小的内存需要？</p><h3 id="了解多路数组聚集"><a href="#了解多路数组聚集" class="headerlink" title="了解多路数组聚集"></a>了解多路数组聚集</h3><p>计算多路数组聚集问题所需注意的：</p><ul><li><p>尽量减少块反复调入内存的次数。</p></li><li><p>尽量利用较少的内存空间完成计算。</p></li></ul><p>该算法的核心是：“用一个二维数组缓存一个2-D立方体的计算结果”。</p><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>题目给定的场景是，把一个基本立方体分成了4x4x4=64块，每块大小10x100x1000。每次读入一个块，1-64块顺序读入。</p><p>首先，第一问，按照维度单元数从小到大聚集就可以了，至于为什么看完第二问的分析大概就能知道。</p><p>第二问，先看下图：<br><img src="https://images2015.cnblogs.com/blog/947970/201611/947970-20161130163740646-553541217.png" alt></p><p>图的大概意思就是，中间是一个被分成64份的基本立方体，边上的三个是它按照不同维度聚集的面。</p><p>因为A的单元数最少，所以先按A维度聚集，看BC面，读取第一块数据，计算机把它沿着A聚集，存入BC面的一个单元c1，这个单元大小（100x1000），接着第二块进入，它在上一步聚集的基础上，进一步聚集到c1，…,直到第4块读取完，只用这一个单元就读取了4个块，完后，就把这个单元的值存入磁盘，接着复用这一个单元，故沿A维度 ，最小占用内存是基本立方体BC面的1/16，也就是400x4000/16=100x1000，也是一个块的BC面的大小；</p><p>沿B维，由图可看出，只有读取完第13块，我们才能完整的得到一个AC面单元，所以之前的块也需要有内存空间来记录，故我们需要开辟4个AC面的单元，大小为基本立方体AC面的1/4，40x4000/4=4x10x1000,也是4个块的AC面； </p><p>沿C维，只有读完49块才能得到一个完整的AB面单元，故我们需要整个AB面的内存，40x400=16x10x100，也是16个块的AB面。</p><p>从上面的分析可以看出，越到后面，越需要更多块的面单元，因为我们需要占用最小的内存，所以我们需要按面单元大小降序进行聚集。  </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;刚刚在写作业时，遇到了多路数组聚集的题，因为老师讲的实在枯燥，这块没太弄明白，故课下费了好大的劲，终于想明白。特地记下，方便以后查看。&lt;br&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="数据挖掘" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
+    
+      <category term="专业课" scheme="http://yoursite.com/tags/%E4%B8%93%E4%B8%9A%E8%AF%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux文件描述符</title>
@@ -463,31 +486,6 @@
     
     
       <category term="chrome" scheme="http://yoursite.com/tags/chrome/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C中的头文件</title>
-    <link href="http://yoursite.com/2019/09/25/C%E4%B8%AD%E7%9A%84%E5%A4%B4%E6%96%87%E4%BB%B6/"/>
-    <id>http://yoursite.com/2019/09/25/C中的头文件/</id>
-    <published>2019-09-25T15:05:23.000Z</published>
-    <updated>2020-04-23T10:51:59.267Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="最先了解的知识"><a href="#最先了解的知识" class="headerlink" title="最先了解的知识"></a>最先了解的知识</h3><ol><li>系统自带的头文件，用&lt;&gt;包含,自定义的头文件，用””包含； </li><li><h1 id="include-预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；"><a href="#include-预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；" class="headerlink" title="include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；"></a>include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；</h1></li><li>查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&lt;&gt;的文件，直接从系统默认路径查找；</li><li>变量，函数可以重复定义，但不可以重复定义。<a id="more"></a></li></ol><hr><h3 id="头文件写法"><a href="#头文件写法" class="headerlink" title="头文件写法"></a>头文件写法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#ifndef MY_POINT </span><br><span class="line">#define MY_POINT </span><br><span class="line">... </span><br><span class="line">#endif</span><br></pre></td></tr></table></figure><ul><li>这类语句，用于控制#define 与 #endif之间的内容不被重复定义或插入。</li><li><h1 id="define与-endif之间可以写一下宏定义，函数定义，变量声明之类的。"><a href="#define与-endif之间可以写一下宏定义，函数定义，变量声明之类的。" class="headerlink" title="define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。"></a>define与#endif之间可以写一下宏定义，函数定义，变量声明之类的。</h1></li><li>我们有时写c程序时，也可以把所有的声明都放到一个头文件中，然后在源文件中 #include”xxx.h”,这样会使你的程序看上去更简洁。</li></ul><hr><h3 id="使用头文件的好处"><a href="#使用头文件的好处" class="headerlink" title="使用头文件的好处"></a>使用头文件的好处</h3><ol><li>头文件只是声明，不占内存空间；</li><li>头文件可以定义所用的函数列表，方便查阅你可以调用的函数；</li><li>调用了头文件，就等于赋予了调用某些函数的权限，可以很方便的调用系统的库函数和自己写的一些工具函数；</li><li>头文件可以定义很多宏定义，就是一些全局静态变量的定义，在这样的情况下，只要修改头文件的内容，程序<br>就可以做相应的修改，不用亲自跑到繁琐的代码内去搜索。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;最先了解的知识&quot;&gt;&lt;a href=&quot;#最先了解的知识&quot; class=&quot;headerlink&quot; title=&quot;最先了解的知识&quot;&gt;&lt;/a&gt;最先了解的知识&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;系统自带的头文件，用&amp;lt;&amp;gt;包含,自定义的头文件，用””包含； &lt;/li&gt;
-&lt;li&gt;&lt;h1 id=&quot;include-预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；&quot;&gt;&lt;a href=&quot;#include-预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；&quot; class=&quot;headerlink&quot; title=&quot;include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；&quot;&gt;&lt;/a&gt;include 预处理指令，编译阶段运行把头文件中所有的代码制过来进行单纯的替换，不检查变量是否重定义的；&lt;/h1&gt;&lt;/li&gt;
-&lt;li&gt;查找头文件方式：先从工程文件所在的文件夹开始查找，如果没找到，从系统默认路径查找&amp;lt;&amp;gt;的文件，直接从系统默认路径查找；&lt;/li&gt;
-&lt;li&gt;变量，函数可以重复定义，但不可以重复定义。
-    
-    </summary>
-    
-    
-    
-      <category term="c语言" scheme="http://yoursite.com/tags/c%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   

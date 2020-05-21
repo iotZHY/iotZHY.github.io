@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: chrome | ZHY的hexo博客</title>
+  <title>数据挖掘-多路数组聚集 | ZHY的hexo博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
   <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-  <meta name="keywords" content="hexo,java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ZHY的hexo博客">
-<meta property="og:url" content="http://yoursite.com/tags/chrome/index.html">
+  <meta name="description" content="前言刚刚在写作业时，遇到了多路数组聚集的题，因为老师讲的实在枯燥，这块没太弄明白，故课下费了好大的劲，终于想明白。特地记下，方便以后查看。">
+<meta name="keywords" content="数据挖掘,专业课">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据挖掘-多路数组聚集">
+<meta property="og:url" content="http://yoursite.com/2020/05/21/数据挖掘-多路数组聚集/index.html">
 <meta property="og:site_name" content="ZHY的hexo博客">
+<meta property="og:description" content="前言刚刚在写作业时，遇到了多路数组聚集的题，因为老师讲的实在枯燥，这块没太弄明白，故课下费了好大的劲，终于想明白。特地记下，方便以后查看。">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/947970/201611/947970-20161130163740646-553541217.png">
+<meta property="og:updated_time" content="2020-05-21T16:03:11.014Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZHY的hexo博客">
+<meta name="twitter:title" content="数据挖掘-多路数组聚集">
+<meta name="twitter:description" content="前言刚刚在写作业时，遇到了多路数组聚集的题，因为老师讲的实在枯燥，这块没太弄明白，故课下费了好大的劲，终于想明白。特地记下，方便以后查看。">
+<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/947970/201611/947970-20161130163740646-553541217.png">
   
     <link rel="alternative" href="/atom.xml" title="ZHY的hexo博客" type="application/atom+xml">
   
@@ -161,59 +167,224 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-数据挖掘-多路数组聚集" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/26/chrome的插件安装/" class="archive-article-date">
-  	<time datetime="2019-09-26T03:39:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/26/chrome的插件安装/">chrome的插件安装</a>
+    <h1 class="article-title" itemprop="name">
+      数据挖掘-多路数组聚集
     </h1>
   
 
-        <div class="article-info info-on-right">
+        <!--显示阅读次数-->
+        
+          <br/>
+          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+          <span class="icon-sort"></span>
+          <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+                    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+          </span>
           
+          </a>
+        
+        <!--显示阅读次数完毕-->
+        
+        <a href="/2020/05/21/数据挖掘-多路数组聚集/" class="archive-article-date">
+  	<time datetime="2020-05-21T14:58:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>刚刚在写作业时，遇到了多路数组聚集的题，因为老师讲的实在枯燥，这块没太弄明白，故课下费了好大的劲，终于想明白。特地记下，方便以后查看。<br><a id="more"></a></p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>一道类似的题：<br>基本立方体有三维A，B，C，其单元数分别为40，400，4000，每维均等分成4块，且一个立方体单元存储度量需要4byte</p>
+<p>1）维度聚集的顺序？<br>2）计算2-D立方体，所需的最小的内存需要？</p>
+<h3 id="了解多路数组聚集"><a href="#了解多路数组聚集" class="headerlink" title="了解多路数组聚集"></a>了解多路数组聚集</h3><p>计算多路数组聚集问题所需注意的：</p>
+<ul>
+<li><p>尽量减少块反复调入内存的次数。</p>
+</li>
+<li><p>尽量利用较少的内存空间完成计算。</p>
+</li>
+</ul>
+<p>该算法的核心是：“用一个二维数组缓存一个2-D立方体的计算结果”。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>题目给定的场景是，把一个基本立方体分成了4x4x4=64块，每块大小10x100x1000。每次读入一个块，1-64块顺序读入。</p>
+<p>首先，第一问，按照维度单元数从小到大聚集就可以了，至于为什么看完第二问的分析大概就能知道。</p>
+<p>第二问，先看下图：<br><img src="https://images2015.cnblogs.com/blog/947970/201611/947970-20161130163740646-553541217.png" alt></p>
+<p>图的大概意思就是，中间是一个被分成64份的基本立方体，边上的三个是它按照不同维度聚集的面。</p>
+<p>因为A的单元数最少，所以先按A维度聚集，看BC面，读取第一块数据，计算机把它沿着A聚集，存入BC面的一个单元c1，这个单元大小（100x1000），接着第二块进入，它在上一步聚集的基础上，进一步聚集到c1，…,直到第4块读取完，只用这一个单元就读取了4个块，完后，就把这个单元的值存入磁盘，接着复用这一个单元，故沿A维度 ，最小占用内存是基本立方体BC面的1/16，也就是400x4000/16=100x1000，也是一个块的BC面的大小；</p>
+<p>沿B维，由图可看出，只有读取完第13块，我们才能完整的得到一个AC面单元，所以之前的块也需要有内存空间来记录，故我们需要开辟4个AC面的单元，大小为基本立方体AC面的1/4，40x4000/4=4x10x1000,也是4个块的AC面； </p>
+<p>沿C维，只有读完49块才能得到一个完整的AB面单元，故我们需要整个AB面的内存，40x400=16x10x100，也是16个块的AB面。</p>
+<p>从上面的分析可以看出，越到后面，越需要更多块的面单元，因为我们需要占用最小的内存，所以我们需要按面单元大小降序进行聚集。  </p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinzhifu.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">chrome</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据挖掘</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">专业课</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/05/11/Linux文件描述符/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux文件描述符</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#题目"><span class="toc-number">2.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解多路数组聚集"><span class="toc-number">3.</span> <span class="toc-text">了解多路数组聚集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-number">4.</span> <span class="toc-text">分析</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -245,9 +416,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
