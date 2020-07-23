@@ -19,14 +19,14 @@
 <meta property="og:site_name" content="ZHY的hexo博客">
 <meta property="og:description" content="编程目标利用编程模拟shell中的管道操作“ps -ef | wc -l” 重要函数 int pipe(int pipe_fd[2]); //管道函数 int dup2(int oldfd, int newfd);">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://img-blog.csdn.net/20171021101043815?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWlzaGl6dW9mZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14802069-e40633ee5c622c3d.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14802069-3ae52f98966c2bd5.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
-<meta property="og:updated_time" content="2020-05-11T10:13:52.481Z">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux编程——无名管道/20171021101043815.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux编程——无名管道/14802069-e40633ee5c622c3d.webp">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux编程——无名管道/14802069-3ae52f98966c2bd5.webp">
+<meta property="og:updated_time" content="2020-07-23T08:09:39.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux编程——无名管道">
 <meta name="twitter:description" content="编程目标利用编程模拟shell中的管道操作“ps -ef | wc -l” 重要函数 int pipe(int pipe_fd[2]); //管道函数 int dup2(int oldfd, int newfd);">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20171021101043815?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWlzaGl6dW9mZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/11/Linux编程——无名管道/20171021101043815.png">
   
     <link rel="alternative" href="/atom.xml" title="ZHY的hexo博客" type="application/atom+xml">
   
@@ -207,15 +207,15 @@
 <li>int dup2(int oldfd, int newfd);<a id="more"></a>
 <h3 id="无名管道"><a href="#无名管道" class="headerlink" title="无名管道"></a>无名管道</h3></li>
 </ul>
-<p><img src="https://img-blog.csdn.net/20171021101043815?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWlzaGl6dW9mZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></p>
+<p><img src="//yoursite.com/2020/05/11/Linux编程——无名管道/20171021101043815.png" alt></p>
 <ul>
 <li>只能用于有亲缘关系的进程，因为子进程可以继承父进程的管道。</li>
 <li>管道是一种特殊的文件，存在于内核的内存当中，不属于任何文件系统。</li>
-<li>它是一个半双工的模式，但是一般我们只需要单工即可，关闭掉多余的文件描述符。<h3 id="dup2函数"><a href="#dup2函数" class="headerlink" title="dup2函数"></a>dup2函数</h3><img src="https://upload-images.jianshu.io/upload_images/14802069-e40633ee5c622c3d.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>dup2(close_this_fd = open(“my.txt”, O_WRONLY), 1);</li>
+<li>它是一个半双工的模式，但是一般我们只需要单工即可，关闭掉多余的文件描述符。<h3 id="dup2函数"><a href="#dup2函数" class="headerlink" title="dup2函数"></a>dup2函数</h3><img src="//yoursite.com/2020/05/11/Linux编程——无名管道/14802069-e40633ee5c622c3d.webp" alt><br>dup2(close_this_fd = open(“my.txt”, O_WRONLY), 1);</li>
 </ul>
 <p>程序的输出会直接输出到标准输出，但以上语句会将现有进程的标准输出（fd = 1）重定向到my.txt对应的文件表。因此输出后，my.txt将会展示刚才程序的输出。这也就是 out &gt; my.txt的实现</p>
 <h3 id="管道的实现"><a href="#管道的实现" class="headerlink" title="管道的实现"></a>管道的实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fd_redirect</span><span class="params">(<span class="keyword">int</span> oldfd,<span class="keyword">int</span> newfd)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pipe_fd[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">if</span>(pipe(pipe_fd)&lt;<span class="number">0</span>)&#123;  					<span class="comment">//创建管道</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"pipe create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line">    <span class="keyword">if</span>(pid&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fork create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pid&gt;<span class="number">0</span>)&#123; 								<span class="comment">//父进程</span></span><br><span class="line">        close(pipe_fd[<span class="number">0</span>]); 					<span class="comment">//关闭父进程管道读端</span></span><br><span class="line">        fd_redirect(pipe_fd[<span class="number">1</span>],<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(execlp(<span class="string">"ps"</span>,<span class="string">"ps"</span>,<span class="string">"-ef"</span>,<span class="literal">NULL</span>)&lt;<span class="number">0</span>)&#123; <span class="comment">//执行“ps -ef”命令</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"father：exec create error\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(pid==<span class="number">0</span>)&#123;			<span class="comment">//子进程</span></span><br><span class="line">        close(pipe_fd[<span class="number">1</span>]); 					<span class="comment">//关闭子进程管道写端</span></span><br><span class="line">        fd_redirect(pipe_fd[<span class="number">0</span>],<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//创建一个文件用于接受输出</span></span><br><span class="line">        <span class="keyword">int</span> fd = open(<span class="string">"/tmp/tmp.txt"</span>,O_CREAT|O_WRONLY|O_APPEND,<span class="number">0600</span>);</span><br><span class="line">        fd_redirect(fd,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(execlp(<span class="string">"wc"</span>,<span class="string">"wc"</span>,<span class="string">"-l"</span>,<span class="literal">NULL</span>)&lt;<span class="number">0</span>)&#123; 	<span class="comment">//执行“wc -l”命令</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"son：exec create error\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fd_redirect</span><span class="params">(<span class="keyword">int</span> oldfd,<span class="keyword">int</span> newfd)</span></span>&#123;</span><br><span class="line">    close(newfd); 				<span class="comment">//关掉原来的文件，因为下面会给它复制一个新的</span></span><br><span class="line">    <span class="keyword">if</span>(dup2(oldfd,newfd)&lt;<span class="number">0</span>)&#123;  	<span class="comment">//把oldfd重定向到newfd, newfd，oldfd指向同一个文件表</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"dup1 create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14802069-3ae52f98966c2bd5.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>管道的总体原理就是（ps -ef | wc -l）</p>
+<p><img src="//yoursite.com/2020/05/11/Linux编程——无名管道/14802069-3ae52f98966c2bd5.webp" alt><br>管道的总体原理就是（ps -ef | wc -l）</p>
 <p>1）A/B两个进程，B进程是A的子进程，A进程执行ls ，B进程执行grep</p>
 <p>2）将A进程的标准输出通过dup2命令重定向到一个buffer区</p>
 <p>3）B进程的标准输入通过dup2重定向到同一个buffer区</p>
@@ -503,19 +503,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">android</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+                <a href="javascript:void(0)" class="js-tag color4">c语言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">IDEA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -732,22 +732,5 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
 </body>
 </html>

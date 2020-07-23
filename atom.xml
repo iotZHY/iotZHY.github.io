@@ -27,7 +27,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;刚刚在写作业时，遇到了多路数组聚集的题，这块没太弄明白，故费了好大的劲，终于想明白。特地记下，方便以后查看。&lt;br&gt;
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;刚刚在写作业时，遇到了多路数组聚集的题，这块没太弄明白，故费了好大的劲，终于想明白。特地记下，方便以后查看。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -50,7 +50,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;这是一篇转载自&lt;a href=&quot;https://www.jianshu.com/p/5e29fea10f82&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.jianshu.com/p/5e29fea10f82&lt;/a&gt;的文章，成功为我解惑。&lt;br&gt;
+      &lt;p&gt;这是一篇转载自&lt;a href=&quot;https://www.jianshu.com/p/5e29fea10f82&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.jianshu.com/p/5e29fea10f82&lt;/a&gt;的文章，成功为我解惑。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -65,16 +65,16 @@
     <link href="http://yoursite.com/2020/05/11/Linux%E7%BC%96%E7%A8%8B%E2%80%94%E2%80%94%E6%97%A0%E5%90%8D%E7%AE%A1%E9%81%93/"/>
     <id>http://yoursite.com/2020/05/11/Linux编程——无名管道/</id>
     <published>2020-05-11T09:17:49.000Z</published>
-    <updated>2020-05-11T10:13:52.481Z</updated>
+    <updated>2020-07-23T08:09:39.315Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="编程目标"><a href="#编程目标" class="headerlink" title="编程目标"></a>编程目标</h3><p>利用编程模拟shell中的管道操作“ps -ef | wc -l”</p><h3 id="重要函数"><a href="#重要函数" class="headerlink" title="重要函数"></a>重要函数</h3><ul><li>int pipe(int pipe_fd[2]); //管道函数</li><li>int dup2(int oldfd, int newfd);<a id="more"></a><h3 id="无名管道"><a href="#无名管道" class="headerlink" title="无名管道"></a>无名管道</h3></li></ul><p><img src="https://img-blog.csdn.net/20171021101043815?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWlzaGl6dW9mZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></p><ul><li>只能用于有亲缘关系的进程，因为子进程可以继承父进程的管道。</li><li>管道是一种特殊的文件，存在于内核的内存当中，不属于任何文件系统。</li><li>它是一个半双工的模式，但是一般我们只需要单工即可，关闭掉多余的文件描述符。<h3 id="dup2函数"><a href="#dup2函数" class="headerlink" title="dup2函数"></a>dup2函数</h3><img src="https://upload-images.jianshu.io/upload_images/14802069-e40633ee5c622c3d.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>dup2(close_this_fd = open(“my.txt”, O_WRONLY), 1);</li></ul><p>程序的输出会直接输出到标准输出，但以上语句会将现有进程的标准输出（fd = 1）重定向到my.txt对应的文件表。因此输出后，my.txt将会展示刚才程序的输出。这也就是 out &gt; my.txt的实现</p><h3 id="管道的实现"><a href="#管道的实现" class="headerlink" title="管道的实现"></a>管道的实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fd_redirect</span><span class="params">(<span class="keyword">int</span> oldfd,<span class="keyword">int</span> newfd)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pipe_fd[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">if</span>(pipe(pipe_fd)&lt;<span class="number">0</span>)&#123;  <span class="comment">//创建管道</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"pipe create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line">    <span class="keyword">if</span>(pid&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fork create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pid&gt;<span class="number">0</span>)&#123; <span class="comment">//父进程</span></span><br><span class="line">        close(pipe_fd[<span class="number">0</span>]); <span class="comment">//关闭父进程管道读端</span></span><br><span class="line">        fd_redirect(pipe_fd[<span class="number">1</span>],<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(execlp(<span class="string">"ps"</span>,<span class="string">"ps"</span>,<span class="string">"-ef"</span>,<span class="literal">NULL</span>)&lt;<span class="number">0</span>)&#123; <span class="comment">//执行“ps -ef”命令</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"father：exec create error\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(pid==<span class="number">0</span>)&#123;<span class="comment">//子进程</span></span><br><span class="line">        close(pipe_fd[<span class="number">1</span>]); <span class="comment">//关闭子进程管道写端</span></span><br><span class="line">        fd_redirect(pipe_fd[<span class="number">0</span>],<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//创建一个文件用于接受输出</span></span><br><span class="line">        <span class="keyword">int</span> fd = open(<span class="string">"/tmp/tmp.txt"</span>,O_CREAT|O_WRONLY|O_APPEND,<span class="number">0600</span>);</span><br><span class="line">        fd_redirect(fd,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(execlp(<span class="string">"wc"</span>,<span class="string">"wc"</span>,<span class="string">"-l"</span>,<span class="literal">NULL</span>)&lt;<span class="number">0</span>)&#123; <span class="comment">//执行“wc -l”命令</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"son：exec create error\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fd_redirect</span><span class="params">(<span class="keyword">int</span> oldfd,<span class="keyword">int</span> newfd)</span></span>&#123;</span><br><span class="line">    close(newfd); <span class="comment">//关掉原来的文件，因为下面会给它复制一个新的</span></span><br><span class="line">    <span class="keyword">if</span>(dup2(oldfd,newfd)&lt;<span class="number">0</span>)&#123;  <span class="comment">//把oldfd重定向到newfd, newfd，oldfd指向同一个文件表</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"dup1 create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://upload-images.jianshu.io/upload_images/14802069-3ae52f98966c2bd5.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>管道的总体原理就是（ps -ef | wc -l）</p><p>1）A/B两个进程，B进程是A的子进程，A进程执行ls ，B进程执行grep</p><p>2）将A进程的标准输出通过dup2命令重定向到一个buffer区</p><p>3）B进程的标准输入通过dup2重定向到同一个buffer区</p><p>4）B进程获取到A进程的输出并执行自己的逻辑</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="编程目标"><a href="#编程目标" class="headerlink" title="编程目标"></a>编程目标</h3><p>利用编程模拟shell中的管道操作“ps -ef | wc -l”</p><h3 id="重要函数"><a href="#重要函数" class="headerlink" title="重要函数"></a>重要函数</h3><ul><li>int pipe(int pipe_fd[2]); //管道函数</li><li>int dup2(int oldfd, int newfd);<a id="more"></a><h3 id="无名管道"><a href="#无名管道" class="headerlink" title="无名管道"></a>无名管道</h3></li></ul><p><img src="//yoursite.com/2020/05/11/Linux编程——无名管道/20171021101043815.png" alt></p><ul><li>只能用于有亲缘关系的进程，因为子进程可以继承父进程的管道。</li><li>管道是一种特殊的文件，存在于内核的内存当中，不属于任何文件系统。</li><li>它是一个半双工的模式，但是一般我们只需要单工即可，关闭掉多余的文件描述符。<h3 id="dup2函数"><a href="#dup2函数" class="headerlink" title="dup2函数"></a>dup2函数</h3><img src="//yoursite.com/2020/05/11/Linux编程——无名管道/14802069-e40633ee5c622c3d.webp" alt><br>dup2(close_this_fd = open(“my.txt”, O_WRONLY), 1);</li></ul><p>程序的输出会直接输出到标准输出，但以上语句会将现有进程的标准输出（fd = 1）重定向到my.txt对应的文件表。因此输出后，my.txt将会展示刚才程序的输出。这也就是 out &gt; my.txt的实现</p><h3 id="管道的实现"><a href="#管道的实现" class="headerlink" title="管道的实现"></a>管道的实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fd_redirect</span><span class="params">(<span class="keyword">int</span> oldfd,<span class="keyword">int</span> newfd)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pipe_fd[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">if</span>(pipe(pipe_fd)&lt;<span class="number">0</span>)&#123;  <span class="comment">//创建管道</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"pipe create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line">    <span class="keyword">if</span>(pid&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fork create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pid&gt;<span class="number">0</span>)&#123; <span class="comment">//父进程</span></span><br><span class="line">        close(pipe_fd[<span class="number">0</span>]); <span class="comment">//关闭父进程管道读端</span></span><br><span class="line">        fd_redirect(pipe_fd[<span class="number">1</span>],<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(execlp(<span class="string">"ps"</span>,<span class="string">"ps"</span>,<span class="string">"-ef"</span>,<span class="literal">NULL</span>)&lt;<span class="number">0</span>)&#123; <span class="comment">//执行“ps -ef”命令</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"father：exec create error\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(pid==<span class="number">0</span>)&#123;<span class="comment">//子进程</span></span><br><span class="line">        close(pipe_fd[<span class="number">1</span>]); <span class="comment">//关闭子进程管道写端</span></span><br><span class="line">        fd_redirect(pipe_fd[<span class="number">0</span>],<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//创建一个文件用于接受输出</span></span><br><span class="line">        <span class="keyword">int</span> fd = open(<span class="string">"/tmp/tmp.txt"</span>,O_CREAT|O_WRONLY|O_APPEND,<span class="number">0600</span>);</span><br><span class="line">        fd_redirect(fd,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(execlp(<span class="string">"wc"</span>,<span class="string">"wc"</span>,<span class="string">"-l"</span>,<span class="literal">NULL</span>)&lt;<span class="number">0</span>)&#123; <span class="comment">//执行“wc -l”命令</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"son：exec create error\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fd_redirect</span><span class="params">(<span class="keyword">int</span> oldfd,<span class="keyword">int</span> newfd)</span></span>&#123;</span><br><span class="line">    close(newfd); <span class="comment">//关掉原来的文件，因为下面会给它复制一个新的</span></span><br><span class="line">    <span class="keyword">if</span>(dup2(oldfd,newfd)&lt;<span class="number">0</span>)&#123;  <span class="comment">//把oldfd重定向到newfd, newfd，oldfd指向同一个文件表</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"dup1 create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="//yoursite.com/2020/05/11/Linux编程——无名管道/14802069-3ae52f98966c2bd5.webp" alt><br>管道的总体原理就是（ps -ef | wc -l）</p><p>1）A/B两个进程，B进程是A的子进程，A进程执行ls ，B进程执行grep</p><p>2）将A进程的标准输出通过dup2命令重定向到一个buffer区</p><p>3）B进程的标准输入通过dup2重定向到同一个buffer区</p><p>4）B进程获取到A进程的输出并执行自己的逻辑</p>]]></content>
     
     <summary type="html">
     
       &lt;h3 id=&quot;编程目标&quot;&gt;&lt;a href=&quot;#编程目标&quot; class=&quot;headerlink&quot; title=&quot;编程目标&quot;&gt;&lt;/a&gt;编程目标&lt;/h3&gt;&lt;p&gt;利用编程模拟shell中的管道操作“ps -ef | wc -l”&lt;/p&gt;
 &lt;h3 id=&quot;重要函数&quot;&gt;&lt;a href=&quot;#重要函数&quot; class=&quot;headerlink&quot; title=&quot;重要函数&quot;&gt;&lt;/a&gt;重要函数&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;int pipe(int pipe_fd[2]); //管道函数&lt;/li&gt;
-&lt;li&gt;int dup2(int oldfd, int newfd);
+&lt;li&gt;int dup2(int oldfd, int newfd);&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
@@ -97,7 +97,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h3&gt;&lt;p&gt;你可以创建同时具有已启动和已绑定两种状态的服务。换言之，可通过调用 startService() 启动服务，让服务无限期运行；此外，还可通过调用 bindService() 让客户端绑定到该服务。&lt;br&gt;
+      &lt;h3 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h3&gt;&lt;p&gt;你可以创建同时具有已启动和已绑定两种状态的服务。换言之，可通过调用 startService() 启动服务，让服务无限期运行；此外，还可通过调用 bindService() 让客户端绑定到该服务。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -118,7 +118,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;i++与++i都是从右向左结合的，i++有滞后性，会先赋值再加一，而++i会先加一再赋值。&lt;br&gt;
+      &lt;p&gt;i++与++i都是从右向左结合的，i++有滞后性，会先赋值再加一，而++i会先加一再赋值。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -139,7 +139,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;…………………….&lt;br&gt;
+      &lt;p&gt;…………………….&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -166,7 +166,7 @@
 &lt;li&gt;Prettier for VSCode&lt;/li&gt;
 &lt;li&gt;Auto Close Tag&lt;/li&gt;
 &lt;li&gt;Auto Rename Tag&lt;/li&gt;
-&lt;li&gt;Path Intellisense
+&lt;li&gt;Path Intellisense&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
@@ -189,7 +189,7 @@
     
     <summary type="html">
     
-      &lt;h4 id=&quot;RSA简单介绍&quot;&gt;&lt;a href=&quot;#RSA简单介绍&quot; class=&quot;headerlink&quot; title=&quot;RSA简单介绍&quot;&gt;&lt;/a&gt;RSA简单介绍&lt;/h4&gt;&lt;p&gt;RSA是 一种非对称加密算法，号称地球上最安全的加密算法，它建立的基础利用了大数素分解的困难性。&lt;br&gt;
+      &lt;h4 id=&quot;RSA简单介绍&quot;&gt;&lt;a href=&quot;#RSA简单介绍&quot; class=&quot;headerlink&quot; title=&quot;RSA简单介绍&quot;&gt;&lt;/a&gt;RSA简单介绍&lt;/h4&gt;&lt;p&gt;RSA是 一种非对称加密算法，号称地球上最安全的加密算法，它建立的基础利用了大数素分解的困难性。&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -214,7 +214,7 @@
     
     <summary type="html">
     
-      &lt;h4 id=&quot;Handler是什么？&quot;&gt;&lt;a href=&quot;#Handler是什么？&quot; class=&quot;headerlink&quot; title=&quot;Handler是什么？&quot;&gt;&lt;/a&gt;Handler是什么？&lt;/h4&gt;&lt;p&gt;在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”&lt;br&gt;
+      &lt;h4 id=&quot;Handler是什么？&quot;&gt;&lt;a href=&quot;#Handler是什么？&quot; class=&quot;headerlink&quot; title=&quot;Handler是什么？&quot;&gt;&lt;/a&gt;Handler是什么？&lt;/h4&gt;&lt;p&gt;在Android中，Handler被用来提供用于线程间通信，以确保线程通信安全（比如UI线程的安全）。包含四个组成部分：Message，Looper，MessageQueue，Handler，这四个组成部分构成了多线程中经典的“生产者————消费者模型”&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -235,7 +235,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;………..&lt;br&gt;
+      &lt;p&gt;………..&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -285,7 +285,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;………..&lt;br&gt;
+      &lt;p&gt;………..&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -306,7 +306,7 @@
     
     <summary type="html">
     
-      &lt;h4 id=&quot;产生的原因：&quot;&gt;&lt;a href=&quot;#产生的原因：&quot; class=&quot;headerlink&quot; title=&quot;产生的原因：&quot;&gt;&lt;/a&gt;产生的原因：&lt;/h4&gt;&lt;p&gt;  由于ip地址的短缺，一个机构内可以申请到的ip地址数远远小于机构内的主机数，且也考虑到互联网的安全性，也不会把所有的主机接入互联网。为了解决问题 RFC1918指明了一些专用地址 ，这些地址只能用于一个机构内通讯 ，而不能用于互联网上的通讯。互联网上的路由器 对目的地址时专用地址的数据报一律不转发。专用地址是全球不唯一的，可重复的，自然也就无法连入互联网。一共有三个地址块：&lt;br&gt;（1）10.0.0.0——10.255.255.255&lt;br&gt;（2）172.16.0.0——172.31.255.255&lt;br&gt;（3）192.168.0.0——192.168.255.255&lt;br&gt;
+      &lt;h4 id=&quot;产生的原因：&quot;&gt;&lt;a href=&quot;#产生的原因：&quot; class=&quot;headerlink&quot; title=&quot;产生的原因：&quot;&gt;&lt;/a&gt;产生的原因：&lt;/h4&gt;&lt;p&gt;  由于ip地址的短缺，一个机构内可以申请到的ip地址数远远小于机构内的主机数，且也考虑到互联网的安全性，也不会把所有的主机接入互联网。为了解决问题 RFC1918指明了一些专用地址 ，这些地址只能用于一个机构内通讯 ，而不能用于互联网上的通讯。互联网上的路由器 对目的地址时专用地址的数据报一律不转发。专用地址是全球不唯一的，可重复的，自然也就无法连入互联网。一共有三个地址块：&lt;br&gt;（1）10.0.0.0——10.255.255.255&lt;br&gt;（2）172.16.0.0——172.31.255.255&lt;br&gt;（3）192.168.0.0——192.168.255.255&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -328,7 +328,7 @@
     <summary type="html">
     
       &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;本地用户名是我们出装系统时设置的，如果当初我们设置用户名是中文时，可能会遇到一下麻烦，对于一些不支持中文路径的软件，可能就安装不了，所以我最好再初装系统时，还是设置成英文字母为好。
+&lt;li&gt;本地用户名是我们出装系统时设置的，如果当初我们设置用户名是中文时，可能会遇到一下麻烦，对于一些不支持中文路径的软件，可能就安装不了，所以我最好再初装系统时，还是设置成英文字母为好。&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
@@ -350,7 +350,7 @@
     <summary type="html">
     
       &lt;h3 id=&quot;什么是交换机？&quot;&gt;&lt;a href=&quot;#什么是交换机？&quot; class=&quot;headerlink&quot; title=&quot;什么是交换机？&quot;&gt;&lt;/a&gt;什么是交换机？&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。
+&lt;li&gt;交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备，它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机，它是以太网的核心，它工作在数据链路层，是基于MAC地址从端口到端口通信的，它不能识别IP地址，因此也叫二层交换机。&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
@@ -376,7 +376,7 @@
 &lt;li&gt;Eclipse for java ee (java IDE，在里面进行主要的编码工作)&lt;/li&gt;
 &lt;li&gt;Tomcat （把自己的主机打造成服务器端）&lt;/li&gt;
 &lt;li&gt;Phpstudy （开启或关闭mysql数据库）&lt;/li&gt;
-&lt;li&gt;Navicat （对数据库可视化操作）
+&lt;li&gt;Navicat （对数据库可视化操作）&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
@@ -396,7 +396,7 @@
     <summary type="html">
     
       &lt;h4 id=&quot;什么是反射？&quot;&gt;&lt;a href=&quot;#什么是反射？&quot; class=&quot;headerlink&quot; title=&quot;什么是反射？&quot;&gt;&lt;/a&gt;什么是反射？&lt;/h4&gt;&lt;p&gt;Java反射说的是在运行状态中，对于任何一个类，我们都能够知道这个类有哪些方法和属性。对于任何一个对象，我们都能够对它的方法和属性进行调用。我们把这种动态获取对象信息和调用对象方法的功能称之为反射机制。&lt;br&gt;我感觉这个动态性，是大家使用反射的最重要的原因，我们可以通过反射并且根据自己的需求，动态的调用一个类的方法。&lt;/p&gt;
-&lt;h4 id=&quot;怎么反射？&quot;&gt;&lt;a href=&quot;#怎么反射？&quot; class=&quot;headerlink&quot; title=&quot;怎么反射？&quot;&gt;&lt;/a&gt;怎么反射？&lt;/h4&gt;&lt;p&gt;反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法&lt;br&gt;
+&lt;h4 id=&quot;怎么反射？&quot;&gt;&lt;a href=&quot;#怎么反射？&quot; class=&quot;headerlink&quot; title=&quot;怎么反射？&quot;&gt;&lt;/a&gt;怎么反射？&lt;/h4&gt;&lt;p&gt;反射最开始肯定是要先加载类，然后在剖析它的构造函数，属性，方法&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -417,7 +417,7 @@
     
     <summary type="html">
     
-      &lt;h5 id=&quot;upcast（向上转型）&quot;&gt;&lt;a href=&quot;#upcast（向上转型）&quot; class=&quot;headerlink&quot; title=&quot;upcast（向上转型）&quot;&gt;&lt;/a&gt;upcast（向上转型）&lt;/h5&gt;&lt;p&gt;我们都知道，父类与子类之间是is-a的关系，时常会见到类似下面的这种语句：&lt;br&gt;&lt;code&gt;Person p = new Student();//Person是Student的父类&lt;/code&gt;&lt;br&gt;同时Student继承并重写了Person的方法，并且也增加了新的方法，&lt;br&gt;那么p调用的成员变量或者成员方法，到底是谁的呢？&lt;br&gt;为此我特地写了两个类，来验证，上代码：&lt;br&gt;
+      &lt;h5 id=&quot;upcast（向上转型）&quot;&gt;&lt;a href=&quot;#upcast（向上转型）&quot; class=&quot;headerlink&quot; title=&quot;upcast（向上转型）&quot;&gt;&lt;/a&gt;upcast（向上转型）&lt;/h5&gt;&lt;p&gt;我们都知道，父类与子类之间是is-a的关系，时常会见到类似下面的这种语句：&lt;br&gt;&lt;code&gt;Person p = new Student();//Person是Student的父类&lt;/code&gt;&lt;br&gt;同时Student继承并重写了Person的方法，并且也增加了新的方法，&lt;br&gt;那么p调用的成员变量或者成员方法，到底是谁的呢？&lt;br&gt;为此我特地写了两个类，来验证，上代码：&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -458,7 +458,7 @@
 &lt;/ul&gt;
 &lt;h6 id=&quot;hexo-d&quot;&gt;&lt;a href=&quot;#hexo-d&quot; class=&quot;headerlink&quot; title=&quot;hexo d&quot;&gt;&lt;/a&gt;hexo d&lt;/h6&gt;&lt;ul&gt;
 &lt;li&gt;hexo deploy 的简写&lt;/li&gt;
-&lt;li&gt;自动生成静态网页并部署到远端，我的blog是部署到了github上
+&lt;li&gt;自动生成静态网页并部署到远端，我的blog是部署到了github上&lt;/li&gt;&lt;/ul&gt;
     
     </summary>
     
@@ -479,7 +479,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;之前在安装chrome插件时踩了好多坑，但是今天在B站上看到了一个很好的视频教程，想看的同学&lt;a href=&quot;https://www.bilibili.com/video/av53026948/?p=1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;点击这里&lt;/a&gt;&lt;br&gt;
+      &lt;p&gt;之前在安装chrome插件时踩了好多坑，但是今天在B站上看到了一个很好的视频教程，想看的同学&lt;a href=&quot;https://www.bilibili.com/video/av53026948/?p=1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;点击这里&lt;/a&gt;&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
