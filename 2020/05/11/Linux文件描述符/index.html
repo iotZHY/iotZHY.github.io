@@ -19,17 +19,17 @@
 <meta property="og:site_name" content="ZHY的hexo博客">
 <meta property="og:description" content="这是一篇转载自https://www.jianshu.com/p/5e29fea10f82的文章，成功为我解惑。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14802069-6491c5d7e545a689.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14802069-32792f46918ffcd9.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14802069-a7fbd42c833cc74e.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/833/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14802069-1118f58cee747a15.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14802069-e40633ee5c622c3d.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/14802069-3ae52f98966c2bd5.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
-<meta property="og:updated_time" content="2020-05-11T10:17:03.701Z">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux文件描述符/1.webp">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux文件描述符/2.webp">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux文件描述符/3.webp">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux文件描述符/4.webp">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux文件描述符/5.webp">
+<meta property="og:image" content="http://yoursite.com/2020/05/11/Linux文件描述符/6.webp">
+<meta property="og:updated_time" content="2020-07-23T08:28:06.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux文件描述符">
 <meta name="twitter:description" content="这是一篇转载自https://www.jianshu.com/p/5e29fea10f82的文章，成功为我解惑。">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/14802069-6491c5d7e545a689.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/11/Linux文件描述符/1.webp">
   
     <link rel="alternative" href="/atom.xml" title="ZHY的hexo博客" type="application/atom+xml">
   
@@ -205,17 +205,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>这是一篇转载自<a href="https://www.jianshu.com/p/5e29fea10f82" target="_blank" rel="noopener">https://www.jianshu.com/p/5e29fea10f82</a>的文章，成功为我解惑。<br><a id="more"></a></p>
-<h3 id="Linux文件系统结构"><a href="#Linux文件系统结构" class="headerlink" title="Linux文件系统结构"></a>Linux文件系统结构</h3><p><img src="https://upload-images.jianshu.io/upload_images/14802069-6491c5d7e545a689.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>1）进程级文件描述符表 Process File Table</p>
+<h3 id="Linux文件系统结构"><a href="#Linux文件系统结构" class="headerlink" title="Linux文件系统结构"></a>Linux文件系统结构</h3><p><img src="/2020/05/11/Linux文件描述符/1.webp" alt><br>1）进程级文件描述符表 Process File Table</p>
 <p>2）系统级打开文件表 System File Table</p>
 <p>3）系统i-Node表</p>
-<h3 id="调用open函数会发生什么"><a href="#调用open函数会发生什么" class="headerlink" title="调用open函数会发生什么"></a>调用open函数会发生什么</h3><p><img src="https://upload-images.jianshu.io/upload_images/14802069-32792f46918ffcd9.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>每次open时，会在进程文件描述符表新增数据（一个int型fd 和一个指针），指针指向系统打开文件表。系统文件表会表明这个打开文件的权限（status 读、写等），当前打开文件的偏移量（offset 即下次读取时的位置），指向系统i-Node表的指针等。因此我们可以知道，fd是针对进程的概念，不同进程的相同fd很大可能并没有任何关系</p>
+<h3 id="调用open函数会发生什么"><a href="#调用open函数会发生什么" class="headerlink" title="调用open函数会发生什么"></a>调用open函数会发生什么</h3><p><img src="/2020/05/11/Linux文件描述符/2.webp" alt><br>每次open时，会在进程文件描述符表新增数据（一个int型fd 和一个指针），指针指向系统打开文件表。系统文件表会表明这个打开文件的权限（status 读、写等），当前打开文件的偏移量（offset 即下次读取时的位置），指向系统i-Node表的指针等。因此我们可以知道，fd是针对进程的概念，不同进程的相同fd很大可能并没有任何关系</p>
 <h3 id="对同一个文件打开多次会怎样"><a href="#对同一个文件打开多次会怎样" class="headerlink" title="对同一个文件打开多次会怎样"></a>对同一个文件打开多次会怎样</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Process A: </span><br><span class="line"></span><br><span class="line">fd1 = open(<span class="string">"/var/file1"</span>, O_RDONLY); </span><br><span class="line"></span><br><span class="line">fd2 = open(<span class="string">"/var/file2"</span>, O_RDWR); </span><br><span class="line"></span><br><span class="line">fd3 = open(<span class="string">"/var/file1"</span>, O_WRONLY);</span><br></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Process B: </span><br><span class="line"></span><br><span class="line">fd1 = open(<span class="string">"/var/file1"</span>, O_RDONLY); </span><br><span class="line"></span><br><span class="line">fd2 = open(<span class="string">"/var/file3"</span>, O_RDONLY);</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/14802069-a7fbd42c833cc74e.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/833/format/webp" alt><br>不管是相同进程还是不同进程，只要调用open就会有一个新的fd和一个新的系统打开文件表的对应项，所以对这些fd进行读取操作并不会造成相互影响。因为系统文件表是独立的，offset也是独立的</p>
-<h3 id="父子进程的文件关系"><a href="#父子进程的文件关系" class="headerlink" title="父子进程的文件关系"></a>父子进程的文件关系</h3><p><img src="https://upload-images.jianshu.io/upload_images/14802069-1118f58cee747a15.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>调用fork后，虽然父子进程都有独立的进程文件描述符表，但所有fd所对应的文件表都会保持完全一致，因此当我们在子进程读取fd1时，父进程的file offset也会同时变化，也就造成了一些奇怪的现象，所以对待fd的读写要谨慎处理</p>
-<h3 id="重定向的实现"><a href="#重定向的实现" class="headerlink" title="重定向的实现"></a>重定向的实现</h3><p><img src="https://upload-images.jianshu.io/upload_images/14802069-e40633ee5c622c3d.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>dup2(close_this_fd = open(“my.txt”, O_WRONLY), 1);</p>
+<p><img src="/2020/05/11/Linux文件描述符/3.webp" alt><br>不管是相同进程还是不同进程，只要调用open就会有一个新的fd和一个新的系统打开文件表的对应项，所以对这些fd进行读取操作并不会造成相互影响。因为系统文件表是独立的，offset也是独立的</p>
+<h3 id="父子进程的文件关系"><a href="#父子进程的文件关系" class="headerlink" title="父子进程的文件关系"></a>父子进程的文件关系</h3><p><img src="/2020/05/11/Linux文件描述符/4.webp" alt><br>调用fork后，虽然父子进程都有独立的进程文件描述符表，但所有fd所对应的文件表都会保持完全一致，因此当我们在子进程读取fd1时，父进程的file offset也会同时变化，也就造成了一些奇怪的现象，所以对待fd的读写要谨慎处理</p>
+<h3 id="重定向的实现"><a href="#重定向的实现" class="headerlink" title="重定向的实现"></a>重定向的实现</h3><p><img src="/2020/05/11/Linux文件描述符/5.webp" alt><br>dup2(close_this_fd = open(“my.txt”, O_WRONLY), 1);</p>
 <p>程序的输出会直接输出到标准输出，但以上语句会将现有进程的标准输出（fd = 1）重定向到my.txt对应的文件表。因此输出后，my.txt将会展示刚才程序的输出。这也就是 out &gt; my.txt的实现</p>
-<h3 id="管道的实现"><a href="#管道的实现" class="headerlink" title="管道的实现"></a>管道的实现</h3><p><img src="https://upload-images.jianshu.io/upload_images/14802069-3ae52f98966c2bd5.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200/format/webp" alt><br>管道的总体原理就是（ls | grep）</p>
+<h3 id="管道的实现"><a href="#管道的实现" class="headerlink" title="管道的实现"></a>管道的实现</h3><p><img src="/2020/05/11/Linux文件描述符/6.webp" alt><br>管道的总体原理就是（ls | grep）</p>
 <p>1）A/B两个进程，B进程是A的子进程，A进程执行ls ，B进程执行grep</p>
 <p>2）将A进程的标准输出通过dup2命令重定向到一个buffer区</p>
 <p>3）B进程的标准输入通过dup2重定向到同一个buffer区</p>
@@ -509,11 +509,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">IDEA</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+                <a href="javascript:void(0)" class="js-tag color5">IDEA</a>
               </li>
              
               <li class="article-tag-list-item">

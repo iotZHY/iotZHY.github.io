@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="ZHY的hexo博客">
 <meta property="og:description" content="前言刚刚在写作业时，遇到了多路数组聚集的题，这块没太弄明白，故费了好大的劲，终于想明白。特地记下，方便以后查看。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://images2015.cnblogs.com/blog/947970/201611/947970-20161130163740646-553541217.png">
-<meta property="og:updated_time" content="2020-07-01T08:59:18.286Z">
+<meta property="og:image" content="http://yoursite.com/2020/05/21/数据挖掘-多路数组聚集/947970-20161130163740646-553541217.png">
+<meta property="og:updated_time" content="2020-07-23T08:15:05.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据挖掘-多路数组聚集">
 <meta name="twitter:description" content="前言刚刚在写作业时，遇到了多路数组聚集的题，这块没太弄明白，故费了好大的劲，终于想明白。特地记下，方便以后查看。">
-<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/947970/201611/947970-20161130163740646-553541217.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/21/数据挖掘-多路数组聚集/947970-20161130163740646-553541217.png">
   
     <link rel="alternative" href="/atom.xml" title="ZHY的hexo博客" type="application/atom+xml">
   
@@ -212,7 +212,7 @@
 <p>该算法的核心是：“用一个二维数组缓存一个2-D立方体的计算结果”。</p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>题目给定的场景是，把一个基本立方体分成了4x4x4=64块，每块大小10x100x1000。每次读入一个块，1-64块顺序读入。</p>
 <p>首先，第一问，按照维度单元数从小到大聚集就可以了，至于为什么看完第二问的分析大概就能知道。</p>
-<p>第二问，先看下图：<br><img src="https://images2015.cnblogs.com/blog/947970/201611/947970-20161130163740646-553541217.png" alt></p>
+<p>第二问，先看下图：<br><img src="/2020/05/21/数据挖掘-多路数组聚集/947970-20161130163740646-553541217.png" alt></p>
 <p>图的大概意思就是，中间是一个被分成64份的基本立方体，边上的三个是它按照不同维度聚集的面。</p>
 <p>因为A的单元数最少，所以先按A维度聚集，看BC面，读取第一块数据，计算机把它沿着A聚集，存入BC面的一个单元c1，这个单元大小（100x1000），接着第二块进入，它在上一步聚集的基础上，进一步聚集到c1，…,直到第4块读取完，只用这一个单元就读取了4个块，完后，就把这个单元的值存入磁盘，接着复用这一个单元，故沿A维度 ，最小占用内存是基本立方体BC面的1/16，也就是400x4000/16=100x1000，也是一个块的BC面的大小；</p>
 <p>沿B维，由图可看出，只有读取完第13块，我们才能完整的得到一个AC面单元，所以之前的块也需要有内存空间来记录，故我们需要开辟4个AC面的单元，大小为基本立方体AC面的1/4，40x4000/4=4x10x1000,也是4个块的AC面； </p>
@@ -500,11 +500,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">IDEA</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+                <a href="javascript:void(0)" class="js-tag color5">IDEA</a>
               </li>
              
               <li class="article-tag-list-item">
