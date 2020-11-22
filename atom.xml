@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-23T08:15:05.595Z</updated>
+  <updated>2020-11-22T09:25:51.038Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>入门计算机视觉</title>
+    <link href="http://yoursite.com/2020/11/22/%E5%85%A5%E9%97%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
+    <id>http://yoursite.com/2020/11/22/入门计算机视觉/</id>
+    <published>2020-11-22T08:27:25.000Z</published>
+    <updated>2020-11-22T09:25:51.038Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="CG、CV、DIP的区别与联系"><a href="#CG、CV、DIP的区别与联系" class="headerlink" title="CG、CV、DIP的区别与联系"></a>CG、CV、DIP的区别与联系</h4><h5 id="1-区别"><a href="#1-区别" class="headerlink" title="(1)区别"></a>(1)区别</h5><p>计算机图形学（Computer Graphics），简称 CG 。输入的是对虚拟场景的描述，通常为多边形数组，而每个多边形由三个顶点组成，每个顶点包括三维坐标、贴图坐标、rgb 颜色等。输出的是图像，即二维像素数组。</p><p>计算机视觉（Computer Vision），简称 CV。输入的是图像或图像序列，通常来自相机、摄像头或视频文件。输出的是对于图像序列对应的真实世界的理解，比如检测人脸、识别车牌。</p><p>数字图像处理（Digtal Image Processing），简称 DIP。输入的是图像，输出的也是图像。Photoshop 中对一幅图像应用滤镜就是典型的一种图像处理。常见操作有模糊、灰度化、增强对比度等。</p><p>即CG是抽象语义-&gt;图像，CV是图像-&gt;抽象语义，DIP是图像-&gt;图像<br><a id="more"></a></p><h5 id="2-联系"><a href="#2-联系" class="headerlink" title="(2)联系"></a>(2)联系</h5><p>CG 中也会用到 DIP，现今的三维游戏为了增加表现力都会叠加全屏的后期特效，原理就是 DIP，只是将计算量放在了显卡端。</p><p>CV 更是大量依赖 DIP 来打杂活，比如对需要识别的照片进行预处理。</p><p>最后还要提到近年来的热点——增强现实（AR），它既需要 CG，又需要 CV，当然也不会漏掉 DIP。它用 DIP 进行预处理，用 CV 进行跟踪物体的识别与姿态获取，用 CG 进行虚拟三维物体的叠加。</p><p><img src="/2020/11/22/入门计算机视觉/1.jpg" alt></p><h4 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h4><h5 id="需要的知识"><a href="#需要的知识" class="headerlink" title="需要的知识"></a>需要的知识</h5><ul><li>编程语言：C/C++，Python</li><li>数学功底：线性代数</li><li>数字图像处理</li><li>机器学习</li><li><p>深度学习</p><h5 id="好的资源（书籍和视频资源）"><a href="#好的资源（书籍和视频资源）" class="headerlink" title="好的资源（书籍和视频资源）"></a>好的资源（书籍和视频资源）</h5><p>书籍：</p></li><li><p>冈萨雷斯的《数字图像处理》</p></li><li><p>西瓜书<br><a href="https://link.zhihu.com/?target=https%3A//github.com/datawhalechina/pumpkin-book" target="_blank" rel="noopener">代码实现</a></p></li><li><p>花书</p></li></ul><p>视频：</p><p><a href="http://open.163.com/newview/movie/courseintro?newurl=%2Fspecial%2Fopencourse%2Fdaishu.html" target="_blank" rel="noopener">麻省理工线性代数</a><br><a href="https://study.163.com/course/courseLearn.htm?courseId=1004570029" target="_blank" rel="noopener">吴恩达机器学习</a><br><a href="https://www.bilibili.com/video/BV1nJ411z7fe/?spm_id_from=333.788.videocard.0" target="_blank" rel="noopener">斯坦福大学的CS231N课程</a><br><a href="https://www.bilibili.com/video/BV1JE411g7XF/?spm_id_from=333.788.videocard.0" target="_blank" rel="noopener">李宏毅2020机器学习深度学习(完整版)国语</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;CG、CV、DIP的区别与联系&quot;&gt;&lt;a href=&quot;#CG、CV、DIP的区别与联系&quot; class=&quot;headerlink&quot; title=&quot;CG、CV、DIP的区别与联系&quot;&gt;&lt;/a&gt;CG、CV、DIP的区别与联系&lt;/h4&gt;&lt;h5 id=&quot;1-区别&quot;&gt;&lt;a href=&quot;#1-区别&quot; class=&quot;headerlink&quot; title=&quot;(1)区别&quot;&gt;&lt;/a&gt;(1)区别&lt;/h5&gt;&lt;p&gt;计算机图形学（Computer Graphics），简称 CG 。输入的是对虚拟场景的描述，通常为多边形数组，而每个多边形由三个顶点组成，每个顶点包括三维坐标、贴图坐标、rgb 颜色等。输出的是图像，即二维像素数组。&lt;/p&gt;
+&lt;p&gt;计算机视觉（Computer Vision），简称 CV。输入的是图像或图像序列，通常来自相机、摄像头或视频文件。输出的是对于图像序列对应的真实世界的理解，比如检测人脸、识别车牌。&lt;/p&gt;
+&lt;p&gt;数字图像处理（Digtal Image Processing），简称 DIP。输入的是图像，输出的也是图像。Photoshop 中对一幅图像应用滤镜就是典型的一种图像处理。常见操作有模糊、灰度化、增强对比度等。&lt;/p&gt;
+&lt;p&gt;即CG是抽象语义-&amp;gt;图像，CV是图像-&amp;gt;抽象语义，DIP是图像-&amp;gt;图像&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="计算机视觉" scheme="http://yoursite.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
+    
+  </entry>
   
   <entry>
     <title>数据挖掘-多路数组聚集</title>
@@ -465,27 +489,6 @@
     
     
       <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>chrome的插件安装</title>
-    <link href="http://yoursite.com/2019/09/26/chrome%E7%9A%84%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2019/09/26/chrome的插件安装/</id>
-    <published>2019-09-26T03:39:15.000Z</published>
-    <updated>2020-04-23T10:52:17.730Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前在安装chrome插件时踩了好多坑，但是今天在B站上看到了一个很好的视频教程，想看的同学<a href="https://www.bilibili.com/video/av53026948/?p=1" target="_blank" rel="noopener">点击这里</a><br><a id="more"></a></p><h4 id="简述过程"><a href="#简述过程" class="headerlink" title="简述过程"></a>简述过程</h4><h6 id="首先给大家介绍两个比较好的chrome插件网站（推荐给不能使用谷歌搜索的小伙伴）"><a href="#首先给大家介绍两个比较好的chrome插件网站（推荐给不能使用谷歌搜索的小伙伴）" class="headerlink" title="首先给大家介绍两个比较好的chrome插件网站（推荐给不能使用谷歌搜索的小伙伴）"></a>首先给大家介绍两个比较好的chrome插件网站（推荐给不能使用谷歌搜索的小伙伴）</h6><ul><li><a href="https://www.crx4chrome.com" target="_blank" rel="noopener">Crx4Chrome</a>(推荐大家使用))</li></ul><ul><li><a href="https://www.extfans.com" target="_blank" rel="noopener">Extfans</a>(这个网站会让大家关注他的公众号，还要验证码)</li></ul><h6 id="再介绍几个好用的插件"><a href="#再介绍几个好用的插件" class="headerlink" title="再介绍几个好用的插件"></a>再介绍几个好用的插件</h6><ul><li><p>Infinity 新标签页(Pro)    </p><p>  效果图：</p><p>  <img src="http://www.cnplugins.com/uploads/crximage/201504/www.cnplugins.com_dbfmnekepjoapopniengjbcpnbljalfg_2.jpg" alt="infinity"></p><ul><li>Adblock Plus -免费广告拦截程序</li></ul><h6 id="插件的下载与安装"><a href="#插件的下载与安装" class="headerlink" title="插件的下载与安装"></a>插件的下载与安装</h6><p>  下载就很简单，直接去上面给的网站去找自己喜欢的插件下载即可。</p><p>  在Crx4Chrome中会下载 .crx 文件，而在Extfans中会下载到一个压缩文件，就很烦。所以，下面会以Crx4Chrome为例演示。</p></li></ul><p>我这里事先准备好了，crx文件 </p><blockquote><p>1.把.crx后缀改为.zip或.7z<br>2.然后解压<br>3.打开chrome浏览器-&gt;更多工具-&gt;扩展程序<br><img src="https://ftp.bmp.ovh/imgs/2019/09/1586b85c2e5e1c7a.png" alt><br>4.打开右上角的开发者模式<br>5.点击左上角的“加载已解压的扩展程序”，选择我们刚才解压的文件<br><img src="https://ftp.bmp.ovh/imgs/2019/09/04cd940a6ec2903b.png" alt><br>6.这样我们就安装成功了</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;之前在安装chrome插件时踩了好多坑，但是今天在B站上看到了一个很好的视频教程，想看的同学&lt;a href=&quot;https://www.bilibili.com/video/av53026948/?p=1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;点击这里&lt;/a&gt;&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="chrome" scheme="http://yoursite.com/tags/chrome/"/>
     
   </entry>
   
