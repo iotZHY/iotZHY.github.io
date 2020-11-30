@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/05/11/Linux编程——无名管道/20171021101043815.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/11/Linux编程——无名管道/14802069-e40633ee5c622c3d.webp">
 <meta property="og:image" content="http://yoursite.com/2020/05/11/Linux编程——无名管道/14802069-3ae52f98966c2bd5.webp">
-<meta property="og:updated_time" content="2020-07-23T08:33:57.838Z">
+<meta property="og:updated_time" content="2020-11-30T05:28:40.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux编程——无名管道">
 <meta name="twitter:description" content="编程目标利用编程模拟shell中的管道操作“ps -ef | wc -l” 重要函数 int pipe(int pipe_fd[2]); //管道函数 int dup2(int oldfd, int newfd);">
@@ -215,7 +215,7 @@
 </ul>
 <p>程序的输出会直接输出到标准输出，但以上语句会将现有进程的标准输出（fd = 1）重定向到my.txt对应的文件表。因此输出后，my.txt将会展示刚才程序的输出。这也就是 out &gt; my.txt的实现</p>
 <h3 id="管道的实现"><a href="#管道的实现" class="headerlink" title="管道的实现"></a>管道的实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fd_redirect</span><span class="params">(<span class="keyword">int</span> oldfd,<span class="keyword">int</span> newfd)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pipe_fd[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">if</span>(pipe(pipe_fd)&lt;<span class="number">0</span>)&#123;  					<span class="comment">//创建管道</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"pipe create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line">    <span class="keyword">if</span>(pid&lt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"fork create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(pid&gt;<span class="number">0</span>)&#123; 								<span class="comment">//父进程</span></span><br><span class="line">        close(pipe_fd[<span class="number">0</span>]); 					<span class="comment">//关闭父进程管道读端</span></span><br><span class="line">        fd_redirect(pipe_fd[<span class="number">1</span>],<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(execlp(<span class="string">"ps"</span>,<span class="string">"ps"</span>,<span class="string">"-ef"</span>,<span class="literal">NULL</span>)&lt;<span class="number">0</span>)&#123; <span class="comment">//执行“ps -ef”命令</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"father：exec create error\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(pid==<span class="number">0</span>)&#123;			<span class="comment">//子进程</span></span><br><span class="line">        close(pipe_fd[<span class="number">1</span>]); 					<span class="comment">//关闭子进程管道写端</span></span><br><span class="line">        fd_redirect(pipe_fd[<span class="number">0</span>],<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//创建一个文件用于接受输出</span></span><br><span class="line">        <span class="keyword">int</span> fd = open(<span class="string">"/tmp/tmp.txt"</span>,O_CREAT|O_WRONLY|O_APPEND,<span class="number">0600</span>);</span><br><span class="line">        fd_redirect(fd,<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(execlp(<span class="string">"wc"</span>,<span class="string">"wc"</span>,<span class="string">"-l"</span>,<span class="literal">NULL</span>)&lt;<span class="number">0</span>)&#123; 	<span class="comment">//执行“wc -l”命令</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"son：exec create error\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fd_redirect</span><span class="params">(<span class="keyword">int</span> oldfd,<span class="keyword">int</span> newfd)</span></span>&#123;</span><br><span class="line">    close(newfd); 				<span class="comment">//关掉原来的文件，因为下面会给它复制一个新的</span></span><br><span class="line">    <span class="keyword">if</span>(dup2(oldfd,newfd)&lt;<span class="number">0</span>)&#123;  	<span class="comment">//把oldfd重定向到newfd, newfd，oldfd指向同一个文件表</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"dup1 create error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/05/11/Linux编程——无名管道/14802069-3ae52f98966c2bd5.webp" alt="-w100"><br>管道的总体原理就是（ps -ef | wc -l）</p>
+<p><img src="/2020/05/11/Linux编程——无名管道/14802069-3ae52f98966c2bd5.webp" alt><br>管道的总体原理就是（ps -ef | wc -l）</p>
 <p>1）A/B两个进程，B进程是A的子进程，A进程执行ps -ef，B进程执行wc -l</p>
 <p>2）将A进程的标准输出通过dup2命令重定向到一个buffer区</p>
 <p>3）B进程的标准输入通过dup2重定向到同一个buffer区</p>
@@ -503,19 +503,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">android</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color4">c语言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">IDEA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,10 +536,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RSA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,7 +559,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">目标追踪</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -571,15 +579,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">win10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">专业课</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">win10</a>
               </li>
             
             <div class="clearfix"></div>
